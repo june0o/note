@@ -1,0 +1,20 @@
+createdAt: "2018-06-29T06:01:53.738Z"
+updatedAt: "2018-06-29T06:06:43.927Z"
+type: "MARKDOWN_NOTE"
+folder: "a3bd2988db3d09ddac50"
+title: "DataFrame"
+content: '''
+  ### DataFrame
+  - Data in DataFrames can be saved to a data source
+  - Use **DataFrame.write** to create a **DataFrameWriter**
+  - **DataFrameWriter** provides convenience functions to externally save the data represented by a DataFrame
+  - **jdbc** inserts into a new or existing table in a database
+  - **json** saves as a JSON file
+  - **parquet** saves as a Parquet file
+  - **orc** saves as an ORC file
+  - **text** saves as a text file (string data in a single column only)
+  - **csv** saves as a CSV file
+'''
+tags: []
+isStarred: false
+isTrashed: false

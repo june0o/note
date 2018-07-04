@@ -1,0 +1,28 @@
+createdAt: "2018-06-26T06:39:54.990Z"
+updatedAt: "2018-06-27T07:38:51.535Z"
+type: "MARKDOWN_NOTE"
+folder: "8418a8fedcdbc1e2a377"
+title: "개발 환경 설정 :wrench:"
+content: '''
+  #### 개발 환경 설정 :wrench:
+  
+  ##### 1. STS 다운로드
+  : Spring Tool Suite: Eclipse 에 Spring 관련 plugin 이 설치되어 있는 툴.
+  - [Download STS](https://spring.io/tools/sts/all) 에서 pc 에 맞는 버전 다운로드
+  - spring-tool-suite.zip 압축을 푼다.
+  - sts-bundle\\sts-3.9.4.RELEASE\\STS.exe 실행
+  
+  ##### 2. Tomcat 다운로드
+  : Tomcat 은 웹 서버를 구동하기 위한 플랫폼
+  : 서버에 올려서 테스트할 경우 필요. junit 으로 테스트 할 수 있으므로 당장은 불필요
+  - [Tomcat](tomcat.apache.org) 에서
+  - Download > Tomcat8.0 > 8.5.31 Core: zip 다운로드
+  
+  
+'''
+tags: [
+  "spring"
+  "개발환경"
+]
+isStarred: false
+isTrashed: false

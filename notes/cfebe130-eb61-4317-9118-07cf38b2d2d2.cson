@@ -1,0 +1,16 @@
+createdAt: "2018-06-29T06:16:44.394Z"
+updatedAt: "2018-06-29T06:19:08.614Z"
+type: "MARKDOWN_NOTE"
+folder: "a3bd2988db3d09ddac50"
+title: "Spark Streaming"
+content: '''
+  ### Spark Streaming
+  - Extends Spark for doing large scale stream processing.
+  - Scales to 100s of nodes and achieves second scale latencies
+  - Efficient and fault-tolerant stateful stream processing
+  - Integrates with Spark's batch and interactive processing
+  - Provides a simple batch-like API for implementing complex algorithms (map, reudce, join and window etc.)
+'''
+tags: []
+isStarred: false
+isTrashed: false

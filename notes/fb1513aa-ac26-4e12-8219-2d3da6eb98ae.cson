@@ -1,0 +1,87 @@
+createdAt: "2018-06-27T07:40:14.073Z"
+updatedAt: "2018-06-28T04:04:34.840Z"
+type: "MARKDOWN_NOTE"
+folder: "8418a8fedcdbc1e2a377"
+title: "Spring Test"
+content: '''
+  #### Spring Test
+  : JUnit 을 감싸서 놓은 라이브러리. bean 생성 코드 등을 생략하여 코드를 더 간결하게 해줌
+  Hello 프로젝트를 기반으로 작성해 보자.
+  
+  #### 1. Spring-Test Annotation
+  > @RunWith(SpringJUnit4ClassRunner.class)
+  
+  jUnit 프레임워크의 테스트 실행방법을 확장할 때 사용하는 어노테이션
+  SpringJUnit4ClassRunner.class 를 지정해주면 jUnit이 ApplicationContext를 만들고 관리 해줌
+  RunWith 어노테이션은 각각의 테스트 별로 객체가 생성되더라도 싱글톤의 ApplicationContext를 보장
+  > @ContextConfiguration(locations="classpath:beans.xml")
+  
+  스프링 빈 설정 파일의 위치를 지정하는 어노테이션
+  
+  #### 2. Spring Test 디펜던시 추가
+  Maven repository 에서 Spring Test 검색. 4.3.17 RELEASE 선택
+  pom.xml 파일에 추가
+  > 
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-test</artifactId>
+          <version>4.3.17.RELEASE</version>
+          <scope>test</scope>
+      </dependency>
+  
+  #### 3. 구현
+  1) 클래스 추가
+  > Printer 클래스 추가
+  
+  src 폴더에서 우클릭 > New > Class 
+  Package: myspring.di.annotation 입력
+  Name: Printer 입력
+  
+  마찬가지 방법으로,
+  >ConsolePrinter 클래스 추가
+  StringPrinter 클래스 추가
+  Hello 클래스 추가
+  
+  2) 객체 생성(bean 설정. auto scanning)
+  > beansannotation.xml 파일 추가
+  > 
+  configuration 우클릭 > New > Spring Bean Configuration file → beansannotation.xml 입력
+  
+  :star: 상세한 코드는 [Spring Test project source](:note:1ae33d41-3681-45ad-bfae-754555cf7844) 문서 참조
+  
+  #### 4. 테스트
+  1) 테스트 파일 생성
+  src 폴더에서 우클릭 > New > class
+  Package: myspring.di.annotation.test 입력
+  Name: HelloBeanAnnotationTest.java 입력
+  
+  
+  2) IoC 컨테이너 역할을 하는 객체 생성
+  > 
+      @RunWith(SpringJUnit4ClassRunner.class)
+      @ContextConfiguration(locations="classpath:configuration/beansannotation.xml")
+      
+  3) IoC 컨테이너에게 bean을 요청
+  >
+      @Autowired
+  	  Hello hello1;
+    
+  4) 테스트 코드 작성
+  >
+      @Test
+  	public void hello() {
+  		System.out.println(hello1 == hello2);
+  		Assert.assertSame(hello1, hello2);
+  		hello1.print();
+  	}
+    
+  5) 실행
+  
+  
+'''
+tags: [
+  "spring"
+  "spring_test"
+]
+isStarred: false
+isTrashed: false

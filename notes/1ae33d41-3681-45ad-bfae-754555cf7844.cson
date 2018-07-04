@@ -1,0 +1,175 @@
+createdAt: "2018-06-28T01:54:44.890Z"
+updatedAt: "2018-06-28T02:31:18.616Z"
+type: "SNIPPET_NOTE"
+folder: "8418a8fedcdbc1e2a377"
+title: "Spring Test project source"
+description: "Spring Test project source"
+snippets: [
+  {
+    name: "ConsolePrinter.java"
+    mode: "Java"
+    content: '''
+      package myspring.di.annotation;
+      
+      import org.springframework.stereotype.Component;
+      
+      /*
+       * @Component("consolePrinter")
+       */
+      @Component
+      public class ConsolePrinter implements Printer {
+      
+      	@Override
+      	public void print(String message) {
+      		System.out.println(message);
+      	}
+      }
+      
+    '''
+  }
+  {
+    name: "Printer.java"
+    mode: "Java"
+    content: '''
+      package myspring.di.annotation;
+      
+      public interface Printer {
+      	public void print(String message);
+      }
+      
+    '''
+  }
+  {
+    name: "StringPrinter.java"
+    mode: "Java"
+    content: '''
+      package myspring.di.annotation;
+      
+      import org.springframework.stereotype.Component;
+      
+      /*
+       * <bean id="sPrinter" class="xx.StringPrinter"/>
+         @Component("stringPrinter") 로 id가 설정됨
+       */
+      @Component
+      public class StringPrinter implements Printer {
+      	private StringBuffer buffer = new StringBuffer();
+      
+      	public void print(String message) {
+      		this.buffer.append(message);
+      	}
+      
+      	public String toString() {
+      		return this.buffer.toString();
+      	}
+      }
+      
+    '''
+  }
+  {
+    name: "Hello.java"
+    mode: "Java"
+    content: '''
+      package myspring.di.annotation;
+      
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.beans.factory.annotation.Qualifier;
+      import org.springframework.beans.factory.annotation.Value;
+      import org.springframework.stereotype.Component;
+      
+      import myspring.di.annotation.Printer;
+      
+      @Component
+      public class Hello {
+      	@Value("스프링")
+      	String name;
+      	@Autowired
+      	@Qualifier("consolePrinter")
+      	Printer printer;
+      	
+      	public Hello() {
+      		super();
+      		System.out.println("Hello default constructor");
+      	}
+      	public String getName() {
+      		return name;
+      	}
+      	public void setName(String name) {
+      		this.name = name;
+      	}
+      	public Printer getPrinter() {
+      		return printer;
+      	}
+      	public void setPrinter(Printer printer) {
+      		this.printer = printer;
+      	}
+      	public String sayHello() {
+      		return "Hello" + name;
+      	}
+      	public void print() {
+      		this.printer.print(sayHello());
+      	}	
+      }
+      
+    '''
+  }
+  {
+    name: "beansannotation.xml"
+    mode: "XML"
+    content: '''
+      <?xml version="1.0" encoding="UTF-8"?>
+      <beans xmlns="http://www.springframework.org/schema/beans"
+      	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      	xmlns:context="http://www.springframework.org/schema/context"
+      	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+      		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+      
+      	<!-- Bean Auto Scanning 설정 -->
+      	<context:component-scan base-package="myspring.di.annotation" />
+      </beans>
+      
+    '''
+  }
+  {
+    name: "HelloBeanAnnotationTest.java"
+    mode: "Java"
+    content: '''
+      package myspring.di.annotation.test;
+      
+      import org.junit.Assert;
+      import org.junit.Test;
+      import org.junit.runner.RunWith;
+      import org.springframework.beans.factory.annotation.Autowired;
+      import org.springframework.test.context.ContextConfiguration;
+      import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+      
+      
+      import myspring.di.annotation.Hello;
+      
+      @RunWith(SpringJUnit4ClassRunner.class)
+      @ContextConfiguration(locations="classpath:configuration/beansannotation.xml")
+      public class HelloBeanAnnotationTest {
+      
+      	@Autowired
+      	Hello hello1;
+      
+      	@Autowired
+      	Hello hello2;
+      
+      	@Test
+      	public void hello() {
+      		System.out.println(hello1 == hello2);
+      		Assert.assertSame(hello1, hello2);
+      		hello1.print();
+      	}
+      }
+      
+    '''
+  }
+]
+tags: [
+  "spring"
+  "source"
+]
+isStarred: false
+isTrashed: false

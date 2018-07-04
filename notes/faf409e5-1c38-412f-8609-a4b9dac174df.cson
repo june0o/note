@@ -1,0 +1,144 @@
+createdAt: "2018-06-27T05:52:56.266Z"
+updatedAt: "2018-06-28T02:32:26.508Z"
+type: "SNIPPET_NOTE"
+folder: "8418a8fedcdbc1e2a377"
+title: "Hello project source"
+description: "Hello project source"
+snippets: [
+  {
+    name: "Printer.java"
+    mode: "Java"
+    content: '''
+      package myspring.di.xml;
+      
+      public interface Printer {
+      	public void print(String message);
+      }
+      
+      
+    '''
+  }
+  {
+    name: "Hello.java"
+    mode: "Java"
+    content: '''
+      package myspring.di.xml;
+      
+      public class Hello {
+      	String name;
+      	Printer printer;
+      	
+      	public Hello() {
+      		super();
+      	}
+      	public String getName() {
+      		return name;
+      	}
+      	public void setName(String name) {
+      		this.name = name;
+      	}
+      	public Printer getPrinter() {
+      		return printer;
+      	}
+      	public void setPrinter(Printer printer) {
+      		this.printer = printer;
+      	}
+      	public String sayHello() {
+      		return "Hello" + name;
+      	}
+      	public void print() {
+      		this.printer.print(sayHello());
+      	}	
+      }
+    '''
+  }
+  {
+    name: "ConsolePrinter.java"
+    mode: "Java"
+    content: '''
+      package myspring.di.xml;
+      
+      public class ConsolePrinter implements Printer {
+      
+      	@Override
+      	public void print(String message) {
+      		System.out.println(message);		
+      	}	
+      }
+      
+    '''
+  }
+  {
+    name: "StringPrinter.java"
+    mode: "Java"
+    content: '''
+      package myspring.di.xml;
+      
+      public class StringPrinter implements Printer {
+      	private StringBuffer buffer = new StringBuffer();
+      
+      	public void print(String message) {
+      		this.buffer.append(message);
+      	}
+      
+      	public String toString() {
+      		return this.buffer.toString();
+      	}
+      }
+    '''
+  }
+  {
+    name: "HelloBeanTest.java"
+    mode: "Java"
+    content: '''
+      package myspring.di.xml.test;
+      
+      import org.junit.Assert;
+      import org.junit.Test;
+      import org.springframework.beans.factory.BeanFactory;
+      import org.springframework.context.support.GenericXmlApplicationContext;
+      
+      import myspring.di.xml.Hello;
+      
+      public class HelloBeanTest {
+      
+      	@Test
+      	public void hello() {
+      		BeanFactory factory = new GenericXmlApplicationContext("configuration/beans.xml");
+      		
+      		Hello hello1 = (Hello)factory.getBean("hello");
+      		Hello hello2 = factory.getBean("hello", Hello.class);
+      		System.out.println(hello1 == hello2);
+      		
+      		Assert.assertSame(hello1, hello2);
+      		hello1.print();
+      	}
+      }
+    '''
+  }
+  {
+    name: "beans.xml"
+    mode: "XML"
+    content: '''
+      <?xml version="1.0" encoding="UTF-8"?>
+      <beans xmlns="http://www.springframework.org/schema/beans"
+      	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+      
+      	<bean id="sPrinter" class="myspring.di.xml.StringPrinter" ></bean>
+      	<bean id="cPrinter" class="myspring.di.xml.ConsolePrinter"></bean>
+      	<bean id="hello" class="myspring.di.xml.Hello">
+      		<property name="name" value="스프링" />
+      		<property name="printer" ref="cPrinter" />
+      	</bean>
+      </beans>
+      
+    '''
+  }
+]
+tags: [
+  "spring"
+  "source"
+]
+isStarred: false
+isTrashed: false

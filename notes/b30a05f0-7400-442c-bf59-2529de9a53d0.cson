@@ -1,0 +1,116 @@
+createdAt: "2018-06-27T01:25:21.714Z"
+updatedAt: "2018-07-02T08:21:45.024Z"
+type: "MARKDOWN_NOTE"
+folder: "8418a8fedcdbc1e2a377"
+title: "Hello 프로젝트 만들기 :deciduous_tree:"
+content: '''
+  #### Hello 프로젝트 만들기 :deciduous_tree:
+  ##### 1. 프로젝트 생성
+  > File > New > Dynamic Web Project
+  
+  - Project name: HelloSpring 입력
+  - Target runtime: Apache Tomcat v8.5 선택
+  Finish 클릭!
+  
+  ##### 2. Maven Project 로 변환
+  > Project 에서 우클릭 > Configure > Convert to Maven project
+  
+  Finish 클릭!
+  
+  ##### 3. Spring dependency 추가
+  > Spring Context 추가
+  
+  Maven repository 에서 Spring Context 검색. 4.3.17 RELEASE 선택
+  pom.xml 파일에 추가
+  > 
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context</artifactId>
+          <version>4.3.17.RELEASE</version>
+      </dependency>
+  
+  :star: Maven dependency 추가하는 방법
+  [Maven Repository](https://mvnrepository.com/) 에서 해당 source 검색
+  적당히 Usage 수가 있는 버전을 선택
+  화면 중간쯤 있는 dependency 부분을 복사하여 pom.xml 에 추가
+  
+  ##### 4. 프로젝트 설명
+  ![1530146205846.png](E:\\edu\\1530146205846.png)
+  
+  - Printer 를 구현한 StringPrinter 와 ConsolePrinter 작성
+  - Hello class 는 name과 printer 변수를 갖고 있고, 기본 생성자, getter/setter 와 sayHello, print Api 로 구성
+  - Hello class 에서는 StringPrinter나 ConsolePrinter에 직접 접근할 수 없고 beans.xml 파일에서 Hello.printer 의 설정에 따라 StringPrinter혹은 ConsolePrinter에 접근하게 됨
+  - beans.xml 파일 내에서 객체 생성을 위한 설정 및 setter injection 설정
+  
+  ##### 5. 구현
+  1) 클래스 추가
+  > Printer 클래스 추가
+  
+  src 폴더에서 우클릭 > New > Class 
+  Package: myspring.di.xml 입력
+  Name: Printer 입력
+  
+  마찬가지 방법으로,
+  > ConsolePrinter 클래스 추가
+  > StringPrinter 클래스 추가
+  > Hello 클래스 추가
+  
+  2) 객체 생성 (bean 설정)
+  : Spring IoC 전략에 의해 개발자가 객체 생성을 직접하지 않는다.
+  객체(bean) 정의 및 Dependency Injection 을 xml 파일에 설정 한다.
+  > beans.xml 파일 추가
+  
+  src 폴더에서 우클릭 > New > folder → Folder name: configuration 입력
+  configuration 우클릭 > New > Spring Bean Configuration file → beans.xml 입력
+  
+  > 객체 설정
+  
+  - SpringPrint 객체를 sPrinter 라는 id로 생성
+  > 
+      <bean id="sPrinter" class="myspring.di.xml.StringPrinter" ></bean>
+  - ConsolePrint 객체를 cPrinter 라는 id로 생성
+  > 
+      <bean id="cPrinter" class="myspring.di.xml.ConsolePrinter"></bean>
+  - Hello 객체를 hello 라는 id로 생성하고 Setter Injection(= property 태그) 설정
+  > 
+      <bean id="hello" class="myspring.di.xml.Hello" scope="prototype">
+          <!-- setter injection -->
+  		<property name="name" value="스프링" />
+  		<property name="printer" ref="cPrinter" />
+  	</bean>
+  
+  :star: 상세한 코드는 [Hello Spring project source](:note:faf409e5-1c38-412f-8609-a4b9dac174df) 문서 참조
+  
+  ##### 6. 테스트
+  1) 테스트 파일 생성
+  src 폴더에서 우클릭 > New > class
+  Package: myspring.di.xml.test 입력
+  Name: HelloBeanTest.java 입력
+  
+  2) IoC 컨테이너 역할을 하는 객체 생성
+  > 
+      BeanFactory factory = new GenericXmlApplicationContext("configuration/beans.xml");
+  
+  3) IoC 컨테이너에게 bean을 요청
+  >
+      Hello hello1 = (Hello)factory.getBean("hello");
+      Hello hello2 = factory.getBean("hello", Hello.class);
+  
+  4) 테스트 코드 작성
+  >
+      Assert.assertSame(hello1, hello2);
+      hello1.print();
+  
+  5) 실행
+  >
+      Console창 -> Hello스프링
+      JUnit 창 확인
+  
+'''
+tags: [
+  "spring"
+  "spring_hello"
+  "junit"
+]
+isStarred: false
+isTrashed: false

@@ -1,0 +1,57 @@
+createdAt: "2018-06-28T06:51:43.735Z"
+updatedAt: "2018-06-28T07:52:19.672Z"
+type: "MARKDOWN_NOTE"
+folder: "a3bd2988db3d09ddac50"
+title: "Spark :fire:"
+content: '''
+  #### Spark :fire:
+  : Apache Spark는 대용량 데이터 프로세싱을 위한 빠르고 범용적인 인메모리 기반 클러스터 컴퓨팅 엔진
+  
+  #### 1. Apache Spark 특징
+  - In-Memory 컴퓨팅(물론 Disk 기반도 가능)
+  - RDD(Resilient Distributed Dataset) 데이터 모델
+  - 다양한 개발 언어 지원(Scala, Java, Python, R, SQL)
+  - Rich API 제공(80여개 이상)
+  - General execution graphs => DAG(Directed Acyclic Graph) => Multiple stages of map & reduce
+  - Hadoop과의 유연한 연계(HDFS, HBase, YARN and others)
+  - 빠른 데이터 Processing (In-Memory Cached RDD, Up to 100x Faster)
+  - 대화형 질의를 위한 Interactive Shell
+  - 실시간 Stream Processing(vs. MapReduce for stored Data)
+  - :star: 하나의 애플리케이션에서 배치, SQL 쿼리, 스트리밍, 머신러닝과 같은 다양한 작업을 하나의 워크플로우로 결합 가능
+  - Both fast to write and fast to run
+  
+  > 용어
+  > 
+  - Resilient: 클러스터의 한 노드가 실패하더라도 다른 노드가 작업 처리 (RDD Lineage, Automatically rebuilt on failure)
+  - Distributed: RDD에 있는 데이터는 클러스터에 자동 분배 및 병렬 연산 수행
+  - Dataset: 메모리나 디스크에 분산 저장된 변경 불가능한 데이터 객체들의 모음
+  - Immutable: RDD는 수정이 안 됨. 변형을 통한 새로운 RDD 생성
+  - Operation APIs
+    - Trasnformations(데이터 변형, ex. map, filter, groupBy, join)
+    - Actions(결과연산 리턴/저장, ex. count, collect, save)
+  - Lazy Evaluation: All Transformations (Action 실행 때까지 일 안 함)
+  - Controllable Persistence: Cache in RAM/Disk 가능(반복 연산에 유리)
+  - Lineage: RDDs track the series of transformations used to build them to recompute lost data
+  
+  #### 2. How to works
+  1 → 4 방향으로 작업 진행
+  1. RDD: Parallel dataset with partitions
+  2.  DAG: Logical Graph of RDD operations
+  3. Stage: Set of Tasks that run parallel (셔플 발생)
+  4. Task: The fundamental unit of execution in Spark
+  
+  > 참고 사이트
+  > 
+  - [Apache Spark](https://spark.apache.org/)
+  - [Programming Guide](https://spark.apache.org/docs/latest/rdd-programming-guide.html)
+  - [Spark API Docs(Scala/Java/Python/R)](https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.package)
+  - [Spark package](https://spark-packages.org): Spark Components 사이트
+  - [Spark + AI Summit](https://databricks.com/sparkaisummit): 좋은 자료 많음
+  - [Databricks](https://databricks.com): 창업자 회사
+  - [The Databricks Blog](https://databricks.com/blog): Spark 기능 선 배포, 자료 많음
+  - 
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false

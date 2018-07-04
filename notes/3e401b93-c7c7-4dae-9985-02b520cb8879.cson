@@ -1,0 +1,152 @@
+createdAt: "2018-06-26T07:41:06.724Z"
+updatedAt: "2018-06-28T01:53:42.250Z"
+type: "MARKDOWN_NOTE"
+folder: "8418a8fedcdbc1e2a377"
+title: "Spring 4 :seedling:"
+content: '''
+  ### Spring 4 :seedling:
+  : Java EE의 복잡한 개발을 단순화 시켜줄 수 있는 Framework
+  
+  #### 1. Spring Framework 전략
+  엔터프라이즈 개발의 복잡함을 상대하는 spring의 전략
+  > ##### Protable Service Abstraction(서비스 추상화)
+  트랜잭션 추상화, OXM 추상화, 데이터 액세스의 Exception 변환 기능 등 기술적인 복잡함은 추상화를 통해 Low Level의 기술 구현 부분과 기술을 사용하는 인터페이스로 분리한다.
+  
+  > ##### DI (Dependency Injection)
+  Spring은 객체지향에 충실한 설계가 가능하도록 단순한 객체 형태로 개발할 수 있고, DI는 유연하게 확장 가능한 객체를 만들어 두고 그 관계는 외부에서 다이내믹하게 설정해준다.
+  
+  > ##### AOP (Aspect Oriented Programming)
+  AOP는 애플리케이션 로직을 담당하는 코드에 남아 있는 기술.
+  관련 코드를 분리해서 별도의 모듈로 관리하게 해주는 강력한 기술이다.
+  
+  > ##### POJO (Plain Old Java Object)
+  POJO는 객체지향 원리에 충실하면서, 특정 환경이나 규약에 종속되지 않고 필요에 따라 재활용될 수 있는 방식으로 설계된 객체이다.
+  
+  > ##### IoC (Inversion of Control)
+  IoC란 "제어의 역전" 즉, 인스턴스 생성부터 소멸까지의 인스턴스 생명주기 관리를 개발자가 아닌 컨테이너가 대신 해준다는 뜻임.
+  즉, 컨테이너 역할을 해주는 프레임워크에게 제어하는 권한을 넘겨서 개발자의 코드가 신경 써야 할 것을 줄이는 전략이다.
+  
+  #### 2. Spring Framework의 기능요소
+  > ##### Core 컨테이너
+  Spring 프레임워크의 기본기능 제공.
+  이 모듈에 있는 BeanFactory는 Spring의 기본 컨테이너이면서 스프링 DI의 기반이다.
+  
+  > ##### Context
+  BeanFactory의 개념을 확장한 것으로 국제화 메시지, 애플리케이션 생명주기 이벤트, 유효성 검증 등을 지원한다.
+  
+  > ##### DAO
+  JDBC에 대한 추상화 계층으로 JDBC 코딩이나 예외처리 하는 부분을 간편화 시켰으며, AOP 모듈을 이용해 트랜잭션 관리 서비스도 제공한다.
+  
+  > ##### ORM
+  MyBatis, Hibernate, JPA 등 널리 사용되는 ORM 프레임워크와의 연결고리를 제공한다.
+  ORM 제품들을 Spring의 기능과 조합해서 사용할 수 있도록 해준다.
+  
+  > ##### AOP
+  AOP 모듈을 통해 Aspect 지향 프로그래밍을 지원.
+  AOP 모듈은 스프링 애플리케이션에서 Aspect를 개발할 수 있는 기반을 지원한다.
+  
+  > ##### Web
+  일반적인 웹애플리케이션 개발에 필요한 기본기능을 제공하고, Webwork나 Struts와 같은 다른 웹어플리케이션 프레임워크와의 통합을 지원한다.
+  
+  > ##### WebMVC
+  MVC(Model View Controller) 패러다임은 사용자 인터페이스가 애플리케이션 로직과 분리되는 웹 애플리케이션을 만드는 경우에 일반적으로 사용되는 패러다임이다. 이 패러다임을 바탕으로 웹 계층에서 결합도를 낮추는 Spring MVC 프레임워크가 있다.
+  
+  #### 3. IoC와 Spring DI
+  > ##### IoC의 개념
+  IoC(제어권의 역전)이란, 객체의 생성, 생명주기의 관리까지 모든 객체에 대한 제어권이 바뀌었다는 것을 의미한다. 
+  > ##### DI (Dependency Injection, 의존성 주입)
+  각 클래스간의 의존관계를 빈 설정(Bean Definition) 정보를 바탕으로 컨테이너가 자동으로 연결해 주는 것
+  - 개발자들은 단지 Bean 설정파일에 의존관계가 필요하다는 정보를 추가하면 됨.
+  - 객체 레퍼런스를 컨테이너로부터 주입 받아서, 실행 시에 동적으로 의존관계가 생성된다.
+  - 컨테이너가 흐름의 주체가 되어 애플리케이션 코드에 의존관계를 주입해 주는 것이다.
+  > ##### DI 관련 용어
+  - Bean: Spring이 IoC 방식으로 관리하는 객체
+  - Bean Factory: Spring의 IoC를 담당하는 핵심 컨테이너
+  Bean을 등록, 생성, 조회, 반환하는 기능을 담당. 
+  - Application Context: BeanFactory를 확장한 IoC 컨테이너. 부가 서비스가 추가로 제공됨
+  - Configuration metadata: Application Context 또는 BeanFactory가 IoC를 적용하기 위해 사용하는 메타 정보를 말함.
+  설정 메타정보는 IoC컨테이너에 의해 관리되는 Bean 객체를 생성하고 구성할 때 사용됨.
+  > ##### DI 의 유형
+  - Setter Injection: Setter 메서드를 이용한 의존성 삽입
+  - Constructor Injection: 생성자를 이용한 의존성 삽입
+  - Method Injection: 일반 메서드를 이용한 의존성 삽입
+  
+  #### 4. Bean 등록 메타정보 구성 전략
+  1) XML 단독 사용
+  - 모든 Bean을 명시적으로 XML에 등록하는 방법
+  - 생성되는 모든 Bean을 XML에서 확인할 수 있다는 장점이 있지만, Bean의 개수가 많아지면 관리가 번거로울 수 있다.
+  2) XML 과 빈 스캐닝 (Bean Scanning) 의 혼용
+  - 빈 스캐닝(Bean Scanning)을 통한 자동인식 Bean 등록 기능 사용
+  - Bean으로 사용될 클래스에 특별한 어노테이션(Annotation)을 부여해주면 이런 클래스를 자동으로 찾아서 Bean으로 등록한다.
+  
+  #### 5. Bean 등록 및 의존관계 설정 Annotation
+  ##### 1) Bean 등록 Annotation
+  > @Component
+  
+  컴포넌트를 나타내는 일반적인 스테레오 타입으로 'bean' 태그와 동일한 역할을 함
+  > @Repository
+  
+  퍼시스턴스(persistence) 레이어, 영속성(파일, DB) 클래스
+  > @Service
+  
+  서비스 레이어, 비즈니스 로직 클래스
+  > @Controller
+  
+  프리젠테이션 레이어, 웹 어플리케이션에서 웹 요청과 응답을 처리하는 클래스
+  ##### 2) Bean 의존관계 주입 Annotation
+  > @Autowired
+  
+  : 의존하는 객체를 자동으로 주입해 주는 어노테이션
+  - DI 가 필요한 경우에 유용
+  - 변수, setter 메서드, 생성자, 일반메서드에 적용 가능
+  - 'property, constructor-arg' 태그와 동일한 역할 
+  >@Resource
+  >
+  : 의존하는 객체를 자동으로 주입해 주는 어노테이션, @Autowired는 타입으로 @Resource는 이름으로 연결한다는 점이 다르다.
+  - 어플리케이션에서 필요로 하는 자원을 자동 연결할 때 사용
+  - 변수, setter 메서드에 적용 가능
+  - 의존하는 객체를 주입할 때는 주로 Name을 이용
+  > @Value
+  > 
+  : 단순한 값을 주입할 때 사용
+  - @Value("Hello") 는 property .. value="Hello" 와 동일
+  > @Qualifier
+  > 
+  : @Autowired 와 같이 사용. 동일한 타입의 Bean 객체가 여러 개 존재할 때 사용
+  
+  ##### 3) Component Scanning
+  > context:component-scan 태그
+  > 
+  : 해당 클래스에 설정된 Annotation을 스캔하기 위한 설정. xml 파일에 한다.
+  >
+      <context:component-scan base-package="myspring.di.annotation"/>
+  - context:include-filter 태그와 context:exclude-filter 태그를 같이 사용하면 자동 스캔 대상에 포함시킬 클래스와 포함시키지 않을 클래스를 구체적으로 명시할 수 있다.
+  
+  #### 6. 프로퍼티 파일
+  : 환경에 따라 자주 변경된는 내용을 이 파일에 분리하여 관리
+  키와 값의 쌍(key=value)로 구성
+  > db.properties 에 값 정의. key=value
+  > 
+      db.driver=oracle.jdbc.OracleDriver
+      db.url=jdbc:oracle:thin:@192.168.0.140:1521:xe
+      db.username=scott
+      db.password=tiger
+  
+  > beans.xml 에서 값 사용 ${key}
+  > 
+      <!-- properties file 정보 설정 -->
+      <context:property-placeholder location="classpath:configuration/db.properties"/>
+  	
+  	<!-- DataSource DBCP Implemetation 객체 등록 -->
+  	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 
+  		p:driverClassName="${db.driver}"
+  		p:url="${db.url}"
+  		p:username="${db.username}"
+  		p:password="${db.password}"
+  	/>
+'''
+tags: [
+  "spring"
+]
+isStarred: false
+isTrashed: false

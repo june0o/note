@@ -1,0 +1,25 @@
+{
+  "folders": [
+    {
+      "key": "8418a8fedcdbc1e2a377",
+      "color": "#30D5C8",
+      "name": "Spring"
+    },
+    {
+      "key": "a3bd2988db3d09ddac50",
+      "color": "#E8D252",
+      "name": "Spark"
+    },
+    {
+      "key": "b63fcc4e3763672db8fe",
+      "color": "#2BA5F7",
+      "name": "SQL"
+    },
+    {
+      "key": "eda59838e6eee10e2731",
+      "color": "#d0021b",
+      "name": "emoji"
+    }
+  ],
+  "version": "1.0"
+}

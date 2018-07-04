@@ -1,0 +1,20 @@
+createdAt: "2018-06-29T01:44:11.991Z"
+updatedAt: "2018-06-29T04:40:35.874Z"
+type: "MARKDOWN_NOTE"
+folder: "b63fcc4e3763672db8fe"
+title: "용어"
+content: '''
+  ### 용어
+  1. GROUP BY
+  GROUP BY문은 동일한 값을 가진 데이터를 집계해서 조회하고자 할 때 사용하는 문장이다.
+  조회, 분석용 SQL에서 가장 많이 사용되는 구문이다.
+  
+  
+  :cookie: [참고 사이트](http://ryu1hwan.tistory.com/entry/SQL문-기초에서중급까지L4GROUP-BY문?category=326014)
+  
+  
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
