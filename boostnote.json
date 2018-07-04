@@ -1,6 +1,11 @@
 {
   "folders": [
     {
+      "key": "78ec2c10b762f941f312",
+      "color": "#2BA5F7",
+      "name": "Rule Engine"
+    },
+    {
       "key": "8418a8fedcdbc1e2a377",
       "color": "#30D5C8",
       "name": "Spring"

@@ -1,0 +1,53 @@
+createdAt: "2018-07-04T08:48:42.582Z"
+updatedAt: "2018-07-04T08:48:45.723Z"
+type: "MARKDOWN_NOTE"
+folder: "78ec2c10b762f941f312"
+title: "개요 :seedling:"
+content: '''
+  ## 개요 :seedling:
+  ### 1. BPM (Business Process Management)
+   더 나은 프로세스를 만들도록 설계된 접근법
+  
+  ### 2. BRM (Business Rule Management)
+   어플리케이션의 재구동 없이 Rule & Process 변경으로 수정 사항을 적용할 수 있는 방법을 제공
+  > 예) 수요일 11시 ~ 12시 구매 시 포인트 2배 적립, 
+  마지막주 수요일은 3배 적립같은 조건을 수정/추가하기에 용이
+  
+  - ##### BRMS(Business Rule Management System)
+  조직이나 기업을 운영하는데 사용되는 복잡하고 다양한 결정 논리를 정의(define), 설치(deploy), 수행(execute), 감시(monitor), 그리고 유지보수(maintain) 하는 소프트웨어 시스템을 말한다.
+  
+  ### 3. 개발 도구
+  * JBoss (Java Beans Open Source Software)
+  * jBPM: JBoss 에 포함된 __BPM__ suite solution
+  : 각 단계에서 어떤 rule 집합들을 적용할 지 결정
+  * Drools: JBoss 에 포함된 __BRM__ system solution 
+  : Fact들과 rule을 비교해 어떤 동작을 할 지 결정
+  Fact: 입력 값. 가능한 POJO(Plain Old Java Object) 형태로 작성하여 특정 java모델이나 기능, 프레임워크에 종속되지 않게 함.
+  
+  ### 4. Drools 
+  * [Drools Documentation](http://docs.jboss.org/drools/release/latestFinal/drools-docs/html_single/)
+  : Rule Engine 관련 전반적인 내용이 기술 되어 있음 
+  > /8. Rule Language Reference - Rule 문법
+  > /9. Complex Event Processing - 복합 이벤트 처리
+  > /10. Integration with Spring - Spring 연동
+  > /20. Workbench
+  > /21-3 Templates of assets/rules - Rule 모듈 만드는 방법 
+  > /25. Examples - 아래 example 소스에 대한 설명이 있음
+  * example 등 소스 참고
+  [GitHub - drools r7.7.0.Final](https://github.com/kiegroup/drools/tree/r7.7.0.Final)
+  
+  ### 5. Example
+  #### 1. Hello World
+  #### 2. Fibonacci
+  
+  #### 3. Banking Tutorial
+  #### 4. Priceing Rule Decision Table Example
+  #### 5. Pet Store Example
+  #### 6. Honest Politician
+  #### 7. Sudoku
+  #### 8. Number Guess
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
