@@ -1,14 +1,14 @@
 createdAt: "2018-07-04T08:51:11.956Z"
-updatedAt: "2018-07-04T08:51:14.122Z"
+updatedAt: "2018-07-06T07:14:47.707Z"
 type: "MARKDOWN_NOTE"
 folder: "78ec2c10b762f941f312"
 title: "jBPM"
 content: '''
-  ### jBPM
+  ## jBPM
   
   - [Red Hat Summit 2014 - Deep Dive into jBPM 6](https://access.redhat.com/videos/872003)
   
-  #### Overview
+  ### Overview
   - jBPM 6 highlights
   - 5 minute demo
   - Deep dive into jBPM Execution Server
@@ -17,7 +17,7 @@ content: '''
     - Repository and deployment
     - Service Tasks
   
-  > #### Key characteristics
+  > ### Key characteristics
   >
   - Light-weight process engine
   - Standards-based (BPMN 2.0, BPSim, JPA, JTA, etc)
@@ -25,14 +25,14 @@ content: '''
     - Designer
     - Data Modeler
     - Form Modeler
-    - BAM
+    - BAM(Business Activity Monitoring)
     - Workbench
   - From embedded to as a service
   - Entire life cycle
     - Model → Deploy → Manage Processes → Manage Tasks → Monitor
   - Cloud-ready
   
-  > #### jBPM Execution Server
+  > ### jBPM Execution Server
   > 
   - KieSession and TaskService
   - RuntimeManager
@@ -43,7 +43,22 @@ content: '''
     - REST, JMS, Java Client
   
   
+  ### [jBPM Documentation](https://docs.jboss.org/jbpm/release/7.7.0.Final/jbpm-docs/html_single/)
   
+  #### 3. jBPM installer
+  #### 4. Examples
+  #### 6. Core Engine Api
+  If you don’t know what to do, simply start by having one knowledge base that contains all your process definitions and create one session that you then use to execute all your processes.
+  
+  
+  #### 7. Processes
+  #### 8. Human Tasks
+  #### 9. Persistence and Transactions
+  #### 10. Workbench (General)
+  #### 13. Designer
+  #### 14. Runtime Management
+  #### 15. Process and Task Management
+  #### 16. Business Activity Monitoring
   
   
 '''

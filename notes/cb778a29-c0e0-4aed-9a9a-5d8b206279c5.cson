@@ -1,0 +1,62 @@
+createdAt: "2018-07-05T08:48:04.808Z"
+updatedAt: "2018-07-06T00:39:23.449Z"
+type: "MARKDOWN_NOTE"
+folder: "78ec2c10b762f941f312"
+title: "jBPM install :balloon:"
+content: '''
+  ## jBPM install :balloon:
+  
+  jBPM-installer-full 7.7.0.Final.zip 을 다운 받아 install 하는 방법에 대해 설명한다.
+  
+  ### 1. 아래 파일을 다운로드
+  [jBPM-installer](https://download.jboss.org/jbpm/release/7.7.0.Final/jbpm-installer-full-7.7.0.Final.zip) 를 다운 받은 후 압축을 푼다.
+  
+  ### 2. install 하기
+  #### 1) build.xml 파일을 열어 187 Line (혹은 Getting Eclipse ...로 검색) 을 아래와 같이 수정
+  : 다운로드 주소가 바뀐으로 추정되며,
+  2018/07/05 현재 eclipse 버전은 photon 으로 neon은 2개 전 버전이다.
+  
+      <get src="http://download.eclipse.org/technology/epp/downloads/release/neon/3/eclipse-jee-neon-3-${download.type}.${download.extension}"
+  
+  #### 2) 압축을 푼 폴더에서 커맨드 창을 띄우고 **ant install.demo** 입력 
+  ![pic_jBPM_install1.png](:storage/cb778a29-c0e0-4aed-9a9a-5d8b206279c5/6e9b48aa.png)
+  
+  위 커맨드를 입력하면 아래와 같은 일을 한다고 한다.
+  - Download WildFly application server
+  - Configure and deploy a process execution server
+  - Configure and deploy the workbench
+  - Configure and deploy the case management application
+  - Download Eclipse
+  - Install the Drools and jBPM Eclipse plugin
+  - Install the Eclipse BPMN 2.0 Modeler
+  
+  jBPM library 를 다운 받은 후 eclipse 에서 jBPM bin 디렉토리를 설정하는 방법도 있는데 이 문서에서는 이 방법을 추천하고 있음.
+  **BUILD SUCCESSFUL** 이 출력되면 성공한 것!
+  
+  #### :star: 덧붙이기 
+  1) Eclipse 다운로드 하는 코드를 주석처리하고, photon 버전을 다운 받은 후 install folder 아래에 두어도 상관 없는 것 같다.
+  2) **ant install.demo.noeclipse** 를 사용하면 eclipse 를 다운 안 받는다.
+  start 할 때도 **ant start.demo.noeclipse** 를 사용
+  
+  ### 3. start 하기
+  #### 1) 커맨드 창에서 **ant start.demo** 입력
+  
+  ![pic_jBPM_start.png](:storage/cb778a29-c0e0-4aed-9a9a-5d8b206279c5/6fa6cee3.png)
+  
+  위 커맨드를 입력하면 아래와 같은 일을 한다고 한다.
+  - Start H2 database server
+  - Start WildFly application server
+  - Start Eclipse
+  
+  그리고 브라우저에서 "http://localhost:8080/jbpm-console/kie-wb.jsp" 을 입력하면 아래와 같은 화면이 나온다!
+  
+  ![pic_jBPM_console.png](:storage/cb778a29-c0e0-4aed-9a9a-5d8b206279c5/b7605e5c.png)
+  
+  #### 4. stop 하기 
+  #### 1) 커맨드 창에서 **ant stop.demo** 입력
+  
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
