@@ -1,0 +1,129 @@
+createdAt: "2018-07-09T05:37:19.487Z"
+updatedAt: "2018-07-09T09:10:53.151Z"
+type: "MARKDOWN_NOTE"
+folder: "78ec2c10b762f941f312"
+title: "drools-docs"
+content: '''
+  ## drools-docs
+  
+  ### 1. Introduction
+  KIE (Knowledge Is Everything)는 우리의 관련 기술을한데 모으기 위해 도입 된 우산 프로젝트입니다. 
+  KIE는 비즈니스 자동화 및 관리를위한 완벽한 솔루션 포트폴리오를 제공하는 다음과 같이 다르지만 관련 프로젝트를 포함합니다.
+  
+  * Drools
+  Drools는 비즈니스 규칙 및 복잡한 이벤트 처리를 빠르고 안정적으로 평가할 수 있도록하는 forward-chaining 및 backward-chaining 추론 기반 규칙 엔진이있는 비즈니스 규칙 관리 시스템입니다. 규칙 엔진은 인공 지능에서 인간 전문가의 의사 결정 능력을 모방하는 컴퓨터 시스템 인 전문가 시스템을 만드는 기본 구성 요소입니다.
+  
+  * jBPM
+  jBPM은 유연한 비즈니스 프로세스 관리 제품군으로 이러한 목표를 달성하기 위해 실행해야 할 단계를 설명함으로써 비즈니스 목표를 모델링 할 수 있습니다.
+  
+  * OptaPlanner
+  OptaPlanner는 직원 로스터 링, 차량 라우팅, 작업 할당 및 클라우드 최적화와 같은 사용 사례를 최적화하는 구속력 해결사입니다.
+  
+  * Drools Workbench
+  Drools Workbench는 사용자 정의 비즈니스 규칙 및 프로세스의 시각적 구성을위한 완벽한 기능의 웹 응용 프로그램입니다.
+  
+  * UberFire
+  UberFire는 Eclipse Rich Client Platform에서 영감을 얻은 웹 기반 워크 벤치 프레임 워크입니다.
+  
+  ##### 1.3.1.1 Dependencies and JARs
+  Drools는 몇 가지 모듈로 나뉘며, 일부는 규칙 개발 / 컴파일 중에 필요하며 일부는 런타임에 필요합니다.
+  
+  ##### 1.3.1.3 Runtime
+  여기서 언급 한 "런타임"요구 사항은 규칙을 이진 형식 (KnowledgePackage 객체 또는 KnowledgeBase 객체 등)으로 배포하는 경우입니다. 이 옵션은 런타임을 매우 가벼운 상태로 유지할 수 있도록하는 선택적 기능입니다. 당신은 drools-compiler를 사용하여 "out of process"규칙 패키지를 생성 한 다음 런타임 시스템에 배포 할 수 있습니다. 이 런타임 시스템은 drools-core.jar 및 knowledge-api 만 실행하면됩니다. 이는 선택적인 배치 패턴이며, 많은 사람들이 응용 프로그램을이 정도 "트림"할 필요는 없지만 특정 환경에서는 이상적인 옵션입니다.
+  
+  ##### 1.3.1.4. Installing IDE (Rule Workbench)
+  
+  * Installing GEF (a required dependency)
+  GEF는 Eclipse 그래픽 편집 프레임 워크로 플러그인의 그래프보기 구성 요소에 사용됩니다.
+  Open the Help→Software updates… →Available Software→Add Site… from the help menu. Location is:
+  http://download.eclipse.org/tools/gef/updates/releases/
+  
+  * Installing GEF from zip file
+  
+  * Installing Drools plug-in from zip file
+  Download the Drools Eclipse IDE plugin from the link below.
+  https://www.drools.org/download/download.html
+  
+  * Drools Runtimes
+   Drools 런타임은 Drools 프로젝트 JAR의 특정 릴리스를 나타내는 파일 시스템의 JAR 모음입니다. 런타임을 만들려면 IDE에서 원하는 릴리스를 가리켜 야합니다. 플러그인 자체에 포함 된 최신 Drools 프로젝트 JAR을 기반으로 새로운 런타임을 만들고 싶다면 쉽게 할 수 있습니다. Eclipse 작업 공간에 기본 Drools 런타임을 지정해야하지만 각각의 개별 프로젝트가 기본값을 대체하고 해당 프로젝트의 적절한 런타임을 구체적으로 선택할 수 있습니다.
+  
+  Eclipse > Preference > Drools > Installed Drools Runtime 에 지정.
+  
+  #### 1.3.3. Eclipse
+  
+  ### 2. Release Note
+  ### 3. Compatibility matrix (호환성 매트릭스)
+  * KIE (Knowledge Is Everything)
+  KIE는 Drools 및 jBPM의 공유 코어입니다. 리소스 구축, 배포 및 활용을위한 통일 ​​된 방법론 및 프로그래밍 모델을 제공합니다.
+  
+  ### 4. KIE
+  #### 4.1 Overview
+  KIE currently consists of the following subprojects:
+  
+  ##### - Anatomy of Projects
+  ￼￼![kie.png](https://docs.jboss.org/drools/release/7.7.0.Final/drools-docs/html_single/KIE/Overview/kie.png)
+  
+  지역 검색 및 최적화 도구 인 OptaPlanner는 Drools Planner에서 분리되어 현재 Drools 및 jBPM의 최상위 프로젝트입니다. Optaplanner는 강력한 Drools 통합을 보유하고 있지만 Drools와는 오랫동안 독립적이었습니다.
+  
+  Polymita 인수에서 다른 것들과 함께 강력한보고 기능을 제공하는 강력한 Dashboard Builder가 제공됩니다. Dashboard Builder는 현재 임시 이름이며 6.0 릴리스 이후에 새로운 이름이 선택됩니다. 대시 보드 빌더는 Drools와 jBPM에 완전히 의존하지 않으며 JBoss의 많은 프로젝트에서 사용되고 JBoss 외부에서 사용됩니다. :)
+  
+  6.0에서 Guvnor의 초점은 웹 기반 IDE를 빌드하기위한 기초를 제공하는 UberFire 플러그인 세트를 캡슐화하기 위해 좁혀졌습니다. 빌드 및 배포를위한 Maven 통합,받은 편지함을 통한 Maven 저장소 및 활동 알림 관리 등. Drools와 jBPM은 Uberfire를 기본으로 사용하고 Guvnor와 같은 플러그인 세트와 함께 의사 결정 테이블, 지침 편집기, BPMN2 디자이너, 휴먼 타스크와 같은 것들을위한 플러그인을 포함하여 워크 벤치 배포판을 빌드합니다. Drools 워크 벤치는 Drools-WB라고합니다. KIE-WB는 모든 Guvnor, Drools 및 jBPM 플러그인을 결합한 uber 워크 벤치입니다. jBPM-WB는 KIE-WB에 의해 실제로 존재하지 않으므로 고스트가 제거됩니다.
+  
+  ##### - Lifecycles
+  - Author: UI 메타포 (예 : DRL, BPMN2, 의사 결정 테이블, 클래스 모델)를 사용하여 지식을 제작합니다.
+  - Build: 제작 된 지식을 배포 가능한 단위로 작성합니다.
+  - Test: 응용 프로그램에 배포되기 전에 KIE 지식을 테스트하십시오.
+  - Deploy: 응용 프로그램이 활용할 수있는 위치에 장치를 배치합니다.
+  - Utilze: 응용 프로그램과 상호 작용할 수있는 KIE 세션 (KieSession)을 제공하기위한 JAR로드 -> KIE는 런타임시 KIE 컨테이너 (KieContainer)를 통해 JAR을 노출합니다. -> KieSession은 런타임과 상호 작용하기 위해 KieContainer에서 생성됩니다.
+  - Run: API를 통해 KieSession과 시스템 상호 작용.
+  - Work: 명령 줄 또는 UI를 통해 KieSession과 사용자 상호 작용
+  - Manage: Manage any KieSession or KieContainer.
+  
+  #### 4.2 Build, Deploy, Utilize and Run
+  
+  ### 5. Hybrid Reasoning (추론)
+  #### 5.1 Artificial Intelligence
+  ##### 5.1.1 A Little History
+  그러나 연구 기금이 말라 버렸고 AI라는 용어가 덜 사용되는 동안, 많은 녹색 싹이 심어졌으며,인지 시스템, 기계 학습, 지능 시스템, 지식 표현 및 추론과 같은 분야별 명칭 아래 조용히 계속되었습니다. 그 후 이들의 파생물이 BRMS (Business Rules Management System) 시장의 전문가 시스템과 같은 상용 시스템으로 진출했습니다.
+  
+  ##### 5.1.2 Knowledge Representation and Reasoning
+  KRR은 상징적 인 형태로 우리의 지식을 표현하는 방식에 관한 것입니다. 추론은이 지식을 사용하여 생각하는 행동에 대해 어떻게 생각하는지에 대한 것입니다. C ++, Java 및 C #과 같은 시스템 기반 객체 지향 언어에는 모델링 된 엔터티의 구성 및 동작을 설명하는 클래스라는 데이터 정의가 있습니다. Java에서는 이러한 설명 된 bean 또는 인스턴스의 모범을 호출합니다.
+  그러나 이러한 분류 시스템은 계산 효율성을 보장하기 위해 제한됩니다. 수년에 걸쳐 연구원은 우리의 세계를 대표하는 점점 더 정교한 방법을 개발해 왔습니다. 많은 사람들이 이미 OWL (Web Ontology Language)에 대해 들어봤을 것입니다. 이론적으로 표현할 수있는 것과 실제적으로 적시에 계산에 사용할 수있는 것 사이에는 항상 간격이 있기 때문에 OWL은 Lite에서 Full까지 다른 하위 언어를 사용합니다. 어떤 추론 시스템이 OWL Full을 지원할 수 있다고 믿는 것은 아닙니다. 그러나 알고리즘의 발전은 이러한 차이를 좁히고 추론 엔진에서 사용할 수있는 표현력을 향상시킵니다.
+  
+  또한 이러한 시스템이 어떻게 사고에 영향을 미치는지에 대한 많은 접근법이 있습니다. 리디렉션 및 데이터 기반의 순방향 체인의 장점을 수동 및 쿼리 기반의 백 워드 체인과 비교하는 토론을 들었을 수 있습니다. 많은 다른 유형의 추론 기술이 존재합니다. 각각의 기술은 우리가 선언적으로 해결할 수있는 문제의 범위를 확대합니다. 불완전한 추리 (퍼지 논리, 확실성 요인), 결정할 수없는 논리, 신념 체계, 시간적 추론 및 상관 관계. Drools를 이해하고 사용하려면이 모든 용어를 이해할 필요가 없습니다. 연구 주제의 범위에 대한 아이디어를 제공하기위한 것일뿐입니다. 연구 주제는 실제로 훨씬 광범위하며 연구자가 새로운 경계를 확장함에 따라 계속해서 커집니다.
+  
+  KRR은 종종 인공 지능의 핵심으로 불립니다. 뇌를 모델링하고 생각보다 패턴 인식에 관한 신경망과 같은 생물학적 접근법을 사용할 때조차도 그들은 KRR 이론에 기초합니다.
+  
+  ##### 5.1.3 Rule Engines and Production Rule Systems (PRS)
+  룰 엔진은 개발자에게 KRR 기능을 제공하는 컴퓨터 프로그램입니다. 높은 수준에는 세 가지 구성 요소가 있습니다.
+  * Ontology
+  * Rules
+  * Data
+  
+  앞서 언급했듯이 온톨로지는 우리가 "사물"에 사용하는 표현 모델입니다. 레코드 나 Java 클래스 또는 본격적인 OWL 기반 온톨로지를 사용할 수 있습니다. 규칙은 추론을 수행합니다. 즉, "사고"를 촉진합니다. 규칙과 온톨로지의 구별은 OWL 기반 온톨로지와 약간 섞여있다.
+  
+  "규칙 엔진"이라는 용어는 어떤 형태로든 결과를 산출하기 위해 데이터에 적용 할 수있는 규칙을 사용하는 모든 시스템이 될 수 있다는 점에서 매우 모호합니다. 여기에는 양식 유효성 검사 및 동적 표현 엔진과 같은 간단한 시스템이 포함됩니다. Malcolm Chisholm이 쓴 "비즈니스 규칙 엔진을 만드는 방법"(2004)은 이러한 모호함의 실례입니다. 이 책은 실제로 유효성 검사 규칙을 보관할 데이터베이스 스키마를 작성하고 변경하는 방법에 관한 것입니다. 그런 다음 해당 유효성 검사 규칙에서 Visual Basic 코드를 생성하여 데이터 입력의 유효성을 검사하는 방법을 보여줍니다. 완벽하게 유효하지만 이것은 우리가 이야기하는 것과는 매우 다릅니다.
+  
+  프로덕션 규칙은 두 부분으로 구성된 구조입니다. 엔진은 프로덕션 규칙 (프로덕션 또는 단순한 규칙이라고도 함)에 대한 사실과 데이터를 일치시켜 결과로 작업을 유도합니다.
+  
+      when
+          <conditions>
+      then
+          <actions>;
+      
+  Drools 5.x는 Rete 알고리즘을 구현하고 확장합니다. 
+  
+  규칙은 생산 메모리에 저장되며 추론 엔진과 일치하는 사실은 작업 메모리에 보관됩니다. 사실은 워킹 메모리에 나타나며, 워킹 메모리에서는 수정되거나 취소 될 수 있습니다. 다수의 규칙과 사실을 가진 시스템은 동일한 사실 주장에 대해 많은 규칙이 적용될 수 있습니다. 이 규칙들은 갈등에 빠져 있다고한다. Agenda는 Conflict Resolution 전략을 사용하여 이러한 충돌 규칙의 실행 순서를 관리합니다.
+  
+  ![rule-engine-inkscape.png](https://docs.jboss.org/drools/release/7.7.0.Final/drools-docs/html_single/HybridReasoning/rule-engine-inkscape.png)
+  Fig. High-level View of a Production Rule System
+  
+  
+  #### 5.2 Rete Algorithm
+  #### 5.3 ReteOO Algorithm
+  #### 5.4 PHREAK Algorithm
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
