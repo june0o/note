@@ -1,0 +1,167 @@
+createdAt: "2018-07-10T06:40:14.680Z"
+updatedAt: "2018-07-10T08:58:24.169Z"
+type: "MARKDOWN_NOTE"
+folder: "e52ea16ddda0e47c89cb"
+title: "Traversal Using Relays around NAT (TURN) Extension for IPv6"
+content: '''
+  ### Traversal Using Relays around NAT (TURN) Extension for IPv6
+  
+  #### 3. Overview of Operation
+  사용자가 TURN 서버가 특정 유형의 주소를 할당하기를 원하면 REQUESTED-ADDRESS-FAMILY 속성과 함께 TURN 서버에 Allocate 요청을 보냅니다. TURN은 UDP와 TCP를 통해 실행될 수 있으며, 클라이언트는 UDP와 TCP를 모두 수신하기 위해 주소 / 포트 쌍을 요청할 수 있습니다.
+  
+  TURN 서버는 Allocate 요청에 대한 응답으로 중계 된 전송 주소를 반환합니다. 이 응답에는 서버가 클라이언트에 할당 한 IP 주소와 포트를 나타내는 XOR-RELAYED-ADDRESS 특성이 포함되어 있습니다.
+  
+  #### 4. Creating an Allocation
+  ##### 4.1 Sending an Allocate Request
+  특정 주소 유형의 중계 된 전송 주소를 얻으려는 클라이언트는 4.1.1 절에 정의 된 REQUESTED-ADDRESS-FAMILY 속성을 TURN 서버에 보내는 Allocate 요청에 포함시킵니다. 클라이언트는 Allocate 요청에 둘 이상의 REQUESTED-ADDRESS-FAMILY 속성을 포함해서는 안됩니다. 그만큼 Allocate 요청을 공식화하는 메커니즘은 [RFC5766]의 6.1 절에 설명되어있다. 클라이언트는 RESERVATION-TOKEN 속성을 포함하는 Allocate 요청에 REQUESTED-ADDRESS-FAMILY 속성을 포함해서는 안됩니다.
+  
+  ###### 4.1.1 The REQUESTED-ADDRESS-FAMILY Attribute
+  TURN 속성은 16 비트 유형, 16 비트 길이 및 가변 길이 값을 사용하여 인 코드 된 TLV (Type-Length-Value)입니다.
+  
+      0                   1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |         Type                  |            Length             |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |     Family    |            Reserved                           |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  
+            Figure 1: Format of REQUESTED-ADDRESS-FAMILY Attribute
+            
+  * Type
+  REQUESTED-ADDRESS-FAMILY 속성의 타입은 0x0017입니다.
+  
+  * Length
+  이 16 비트 필드는 속성의 길이를 바이트 단위로 포함합니다. 이 속성의 길이는 4 바이트입니다.
+  
+  * Family
+  0x01: IPv4 address, 0x02: IPv6 address (RFC5389 section 15.1)
+  
+  * Reserved
+  이 24bit 필드는 클라이언트는 0으로 설정해야 하며, 서버는 무시해야 한다.(must)
+  
+  ##### 4.2 Receiving an Allocate Request
+  [RFC5766]에 명시된 바와 같이 Allocate 응답은 Allocate 요청에 포함 된 동일한 트랜잭션 ID를 포함하며 XOR-RELAYED-ADDRESS 특성은 릴레이 된 전송 주소로 설정됩니다.
+  
+  XOR-RELAYED-ADDRESS 속성은 할당 된 IP 주소 및 포트를 나타냅니다. 이것은 XOR-MAPPED-ADDRESS [RFC5389]와 같은 방식으로 부호화된다.
+  
+  REQUESTED-ADDRESS-FAMILY 속성이 없으면 서버는 IPv4 주소를 할당해야 한다.
+  만약 IPv4 주소 할당이 로컬 정책으로 불가능하면 서버는 440(Address Family not Supported) 에러를 반환한다.
+  
+  만약 클라이언트가 요청한 Address family 를 서버가 지원하지 않으면, Allocate 에러 응답을 생성해야 하고, 에러 응답코드를 포함해야 한다. 4.2.1 에 정의된
+  
+  ###### 4.2.1 Unsupported Address Family
+  > 440 (Address Family not Supported)
+  > 
+  The server does not support the address family requested by the client.
+  
+  ##### 4.3 Receiving an Allocate Error Response
+  클라이언트가 440 에러코드를 포함한 Allocation 에러 응답을 수신 했다면, 재시도 하지 말아라.
+  
+  #### 5. Refreshing an Allocation
+  [RFC5766] 의 7 장에 자세하게 기술되어 있다.
+  ##### 5.1 Sending a Refresh Request
+  [RFC5766] 의 7.1 장에 기술된 대로 Refresh Request를 생성한다.
+  클라이언트는 Refresh Request에 REQUESTED-ADDRESS-FAMILY 속성을 포함해서는 안됩니다.
+  
+  ##### 5.2 Receiving a Refresh Request
+  만약 서버가 Refresh Request에 REQUESTED-ADDRESS-FAMILY 속성이 있고, 속성의 값이 할당된 address family 와 일치하지 않으면, 서버는 443(Peer Address Family Mismatch) Refresh 에러 응답을 해야 한다.
+  
+  #### 6. CreatePermission
+  여기에 명시된 동작은 [RFC5766]의 9 절에 정의 된 처리에 영향을줍니다.
+  
+  ##### 6.1 Sending a CreatePermission Request
+  클라이언트는 할당을 위해 중계 된 전송 주소와 동일한 주소 패밀리의 주소를 가진 XOR-PEER-ADDRESS 속성만을 포함해야한다.
+  
+  ##### 6.2 Receiving a CreatePermission Request
+  XOR-PEER-ADDRESS 속성이 할당을 위해 중계 된 전송 주소와 다른 주소 패밀리의 주소를 포함하는 경우, 서버는 443 (Peer Address Family Mismatch) 응답 코드로 오류 응답을 생성해야한다.
+  
+  ###### 6.2.1 Peer Address Family Mismatch
+  > 443 (Peer Address Family Mismatch)
+  > 
+  A peer address was of a different address family than that of the relayed transport address of the allocation.
+  
+  #### 7. Channels
+  여기에 명시된 행동은 [RFC5766]의 11 절에 정의 된 처리에 영향을 미친다.
+  
+  ##### 7.1 Sending a ChannelBind Request
+  클라이언트는 할당을 위해 중계 된 전송 주소와 동일한 주소 패밀리의 주소를 가진 XOR-PEER-ADDRESS 속성만을 포함해야한다.
+  
+  ##### 7.2 Receiving a ChannelBind Request
+  XOR-PEER-ADDRESS 속성이 할당을 위해 중계 된 전송 주소와 다른 주소 패밀리의 주소를 포함하는 경우, 서버는 443 (Peer Address Family Mismatch) 응답 코드로 오류 응답을 생성해야한다.
+  
+  #### 8. Packet Translations
+  TURN spec [RFC5766]는 TURN 중계가 IPv4 패킷 (즉, IPv4 대 IPv4 변환)으로 구성된 트래픽을 어떻게 중계해야 하는지를 기술한다. 이 문서에서는 IPv4-to-IPv6, IPv6-to-IPv4, and IPv6-to-IPv6 변환에 대해 설명한다.
+  
+  아래의 설명은 선호하는 행동과 다른 행동의 두 부분으로 구성됩니다. 서버는 기본 동작을 구현해야합니다 (SHOULD). 그렇지 않으면 서버는 대체 동작을 구현해야하며 반드시 다른 작업을 수행해서는 안됩니다.
+  
+  ##### 8.1 IPv4-to-IPv6 Translations
+  > Traffic Class
+  > 
+  * Preferred behavior: [Section 4 of RFC6145](https://tools.ietf.org/html/rfc6145#section-4) 에 기술 
+  * Alternate behavior: 나가는(outgoing) 패킷의 Traffic Class를 기본값으로 설정합니다.
+  
+  > Flow Label
+  > 
+  * Preferred behavior: 릴레이는 플로우 라벨을 0으로 설정합니다. 릴레이는 플로우 라벨을 IPv6 플로우 라벨 필드 [RFC3697]를 지원한다면 다른 값으로 설정할 수 있습니다.
+  * Alternate behavior: 나가는(outgoing) 패킷의 Flow Label을 기본값으로 설정합니다.
+  
+  > Hop Limit
+  > 
+  * Preferred behavior: [Section 4 of RFC6145](https://tools.ietf.org/html/rfc6145#section-4) 에 기술 
+  * Alternate behavior: 나가는(outgoing) 패킷의 Hop Limit을 기본값으로 설정합니다.
+  
+  > Fragmentation
+  > 
+  * Preferred behavior: [Section 4 of RFC6145](https://tools.ietf.org/html/rfc6145#section-4) 에 기술 
+  * Alternate behavior: 릴레이는 들어오는 조각을 조립합니다. 릴레이는 나가는 패킷을 보내기 위해 기본 동작을 따릅니다. 우선 동작과 대체 동작 모두에 대해 DONT-FRAGMENT 속성 ([RFC5766], 14.8 절)은 반드시 서버에 의해 무시되어야한다.
+  
+  > Extension Headers
+  > 
+  * Preferred behavior: 중계기는 위에서 설명한대로 단편 헤더를 제외하고는 모든 IPv6 확장 헤더없이 나가는 패킷을 보냅니다.
+  * Alternate behavior: preffered 와 동일.
+  
+  ##### 8.2 IPv6-to-IPv6 Translations
+  > Flow Label
+  > 
+  * Preferred behavior: 
+  * Alternate behavior: 
+  
+  > Hop Limit
+  > 
+  * Preferred behavior: 
+  * Alternate behavior: 
+  
+  > Fragmentation
+  > 
+  * Preferred behavior: 
+  * Alternate behavior: 
+  
+  > Extension Headers
+  > 
+  * Preferred behavior: 
+  * Alternate behavior: 
+  
+  
+  ##### 8.3 IPv6-to-IPv4 Translations
+  > Type of Service and Precedence
+  > 
+  * Preferred behavior: 
+  * Alternate behavior: 
+  
+  > Time to Live
+  > 
+  * Preferred behavior: 
+  * Alternate behavior: 
+  
+  > Fragmentation
+  > 
+  * Preferred behavior: 
+  * Alternate behavior: 
+  
+  
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false

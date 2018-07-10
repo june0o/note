@@ -24,6 +24,16 @@
       "key": "eda59838e6eee10e2731",
       "color": "#d0021b",
       "name": "emoji"
+    },
+    {
+      "key": "906b695e2335791df6d4",
+      "color": "#3FD941",
+      "name": "DataBase"
+    },
+    {
+      "key": "e52ea16ddda0e47c89cb",
+      "color": "#f5a623",
+      "name": "TURN IPv6"
     }
   ],
   "version": "1.0"
