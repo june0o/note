@@ -1,10 +1,10 @@
 createdAt: "2018-07-10T06:40:14.680Z"
-updatedAt: "2018-07-10T08:58:24.169Z"
+updatedAt: "2018-07-12T00:43:35.887Z"
 type: "MARKDOWN_NOTE"
 folder: "e52ea16ddda0e47c89cb"
-title: "Traversal Using Relays around NAT (TURN) Extension for IPv6"
+title: "Traversal Using Relays around NAT (TURN) Extension for IPv6 (RFC6156)"
 content: '''
-  ### Traversal Using Relays around NAT (TURN) Extension for IPv6
+  ### Traversal Using Relays around NAT (TURN) Extension for IPv6 (RFC6156)
   
   #### 3. Overview of Operation
   사용자가 TURN 서버가 특정 유형의 주소를 할당하기를 원하면 REQUESTED-ADDRESS-FAMILY 속성과 함께 TURN 서버에 Allocate 요청을 보냅니다. TURN은 UDP와 TCP를 통해 실행될 수 있으며, 클라이언트는 UDP와 TCP를 모두 수신하기 위해 주소 / 포트 쌍을 요청할 수 있습니다.

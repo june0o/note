@@ -1,5 +1,5 @@
 createdAt: "2018-07-09T05:37:19.487Z"
-updatedAt: "2018-07-10T02:37:22.890Z"
+updatedAt: "2018-07-13T06:39:00.463Z"
 type: "MARKDOWN_NOTE"
 folder: "78ec2c10b762f941f312"
 title: "drools-docs"
@@ -54,7 +54,7 @@ content: '''
   ### 2. Release Note
   ### 3. Compatibility matrix (호환성 매트릭스)
   * KIE (Knowledge Is Everything)
-  KIE는 Drools 및 jBPM의 공유 코어입니다. 리소스 구축, 배포 및 활용을위한 통일 ​​된 방법론 및 프로그래밍 모델을 제공합니다.
+  KIE는 Drools 및 jBPM의 공유 코어입니다. 리소스 구축, 배포 및 활용을위한 통일된 방법론 및 프로그래밍 모델을 제공합니다.
   
   ### 4. KIE
   #### 4.1 Overview
@@ -130,7 +130,9 @@ content: '''
   ##### 5.1.5 Expert Systems
   
   #### 5.2 Rete Algorithm
-  라틴어로 "rete"는 "net"또는 "network"를 의미합니다. Rete 알고리즘은 규칙 편집(Rule compilation)과 런타임 실행(Runtime execution)의 두 부분으로 나눌 수 있습니다.
+  Rete 알고리즘은 규칙(rule) 엔진에서 규칙을 더 빠른 속도로 패턴 매칭하기 위한 그래프 기반의 알고리즘.규칭긔 조건문들을 그래프의 노드들로 구성하여 관리하고 조건문에 매칭된 결과들을 그래프 노드들로 관리해 나가기에 빠르게 패턴 매칭이 가능하다.
+  
+  라틴어로 "rete"는 "net"또는 "network"를 의미합니다. Rete 알고리즘은 규칙 편집/컴파일(Rule compilation)과 런타임 실행(Runtime execution)의 두 부분으로 나눌 수 있습니다.
   
   Compilation 알고리즘은 효율적인 식별 네트워크를 생성하기 위해 프로덕션 메모리의 규칙을 처리하는 방법을 설명합니다. 기술적이지 않은 용어로, 판별 네트워크는 데이터가 네트워크를 통해 전파 될 때 데이터를 필터링하는 데 사용됩니다. 네트워크 상단의 노드는 여러 개의 일치 항목을 갖게되며 네트워크가 아래로 가면 일치 항목 수가 줄어들게됩니다. 네트워크 맨 아래에는 터미널 노드가 있습니다. Dr. Forgy의 1982 년 논문에서 그는 루트, 1 입력, 2 입력 및 터미널의 4 가지 기본 노드를 설명했습니다.
   ![Rete_Nodes.png](https://docs.jboss.org/drools/release/7.7.0.Final/drools-docs/html_single/HybridReasoning/Rete_Nodes.png)
@@ -145,10 +147,120 @@ content: '''
   
   Drools는 해싱을 사용하여 ObjectTypeNode에서 AlphaNode 로의 전파를 최적화하여 Rete를 확장합니다. AlphaNode가 ObjectTypeNode에 추가 될 때마다 값으로 AlphaNode가있는 HashMap에 리터럴 값을 키로 추가합니다. 새로운 인스턴스가 각 AlphaNode로 전달되는 것이 아니라 ObjectType 노드에 들어가면 대신 HashMap에서 올바른 AlphaNode를 검색하여 불필요한 리터럴 검사를 피할 수 있습니다.
   
-  
-  
   #### 5.3 ReteOO Algorithm
   #### 5.4 PHREAK Algorithm
+  
+  ### 6. User Guide
+  #### 6.1 The Basics
+  ##### 6.1.1 Stateless Knowledge Session
+  유추를 사용하지 않는 Stateless 세션은 가장 간단한 use case로 구성됩니다. Stateless 세션은 일부 데이터를 전달한 다음 일부 결과를 다시 받는 함수처럼 호출 할 수 있습니다.
+  일반적은 사용 사례는 다음과 같고, 이에 국한되지 않는다.
+  * Validation
+    * Is this person eligible for a mortgage?
+  
+  * Calculation
+    * Compute a mortgage premium.
+  
+  * Routing and Filtering
+    * Filter incoming messages, such as emails, into folders.
+    * Send incoming messages to a destination.
+  
+  예제. 운전 면허 애플리케이션
+  
+      public class Applicant {
+          private String name;
+          private int age;
+          private boolean valid;
+          // getter and setter methods here
+      }
+  나이 제한 룰: 18 미만는 유효하지 않음. 
+  
+      package com.company.license
+  
+      rule "Is of valid age"
+      when 
+          $a : Applicant( age < 18 )
+      then
+          $a.setValid( false );
+      end
+  
+  삽입된 인스턴스가 오브젝트 타입의 제한(constraint) 조건과 모든 필드 제한 조건을 모두 충족시키면 일치한다고 합니다. 삽입된 데이터와 패턴을 일치시키는 프로세스는 패턴 매칭이라고도 합니다.
+  
+  Kie세션을 만들고 테스트.
+  
+      KieServices kieServices = KieServices.Factory.get();
+      KieContainer kContainer = kieServices.getKieClasspathContainer();
+      
+      StatelessKieSession kSession = kContainer.newStatelessKieSession();
+      Applicant applicant = new Applicant( "Mr John Smith", 16 );
+      assertTrue( applicant.isValid() );
+      ksession.execute( applicant );
+      assertFalse( applicant.isValid() );
+      
+  ##### 6.1.2 Stateful Knowledge Session
+  Stateful Session은 오랫동안 존재하며 시간이 지남에 따라 반복적인 변경이 가능합니다. Stateful Session의 일반적인 사용 사례는 다음과 같으나 이에 국한되지 않습니다.
+  
+  * Monitoring: Stock market monitoring and analysis for semi-automatic buying.
+  * Diagnostics: Fault finding, medical diagnostics(진단법)
+  * Logistics: Parcel tracking and delivery provisioning
+  * Compliance: Validation of legality for market trades.
+  
+  KieSession은 StatelessKieSession과 같은 BatchExecutor 인터페이스도 지원합니다. 유일한 차이점은 Stateful Session의 끝에 FireAllRules 명령이 자동으로 호출되지 않는다는 것입니다.
+  
+  > 방에 불이 났을 경우 처리하는 예제.
+  > 
+  ##### 6.1.3 Method vs Rules
+  * Methods are called directly.
+  * Specific instances are passed.
+  * One call results in a single execution.
+  * Rules execute by matching against any data as long it is inserted into the engine.
+  * Rules can never be called directly.
+  * Specific instances cannot be passed to a rule.
+  * Depending on the matches, a rule may fire once or several times, or not at all.
+  
+  #### 6.2 Execution Control
+  ##### 6.2.1 Agenda
+  Agenda는 Rete 기능입니다. 그것은 실행할 수있는 규칙 집합을 유지 관리하며, 그 작업은 결정적 순서로 실행을 예약하는 것입니다.
+  
+  RuleRuntime에 대한 작업 중에 규칙이 완전히 일치하여 실행 대상이 될 수 있습니다. 단일 규칙 런타임 액션은 여러 개의 적합한 규칙을 초래할 수 있습니다. 규칙이 완전히 일치하면 규칙 일치가 만들어지며 규칙과 일치하는 사실이 참조되어 Agenda에 배치됩니다. Agenda는 Conflict Resolution 전략을 사용하여 이러한 일치의 실행 순서를 제어합니다.
+  
+  ##### 6.2.2 Rule Matches and Conflict Sets
+  ###### 6.2.2.1 Cashflow Example
+  ###### 6.2.2.2. Conflict Resolution
+  ###### 6.2.2.3. Salience
+  ###### 6.2.2.4. Agenda Groups
+  
+  
+  #### 6.3 Inference
+  
+  #### 6.4 Truth Maintenance with Logical Objects
+  A "insertLogical" is part of the Drools Truth Maintenance System (TMS). 
+  ##### 6.4.1.2. Important note: Equality for Java objects
+  As the truth maintenance system needs to know when two different physical objects are equal in value, both equals and hashCode must be overridden correctly, as per the Java standard.
+  
+  #### 6.5 Decision Tables in Spreadsheets
+  의사 결정 테이블은 조건부 논리를 나타내는 "정확하면서도 컴팩트 한"(위키 백과 참조) 방법으로 비즈니스 수준 규칙에 매우 적합합니다.
+  
+  ##### 6.5.1. When to Use Decision Tables
+  룰 템플리트 및 데이터로 표현 될 수있는 룰이 존재할 경우 의사 결정 테이블을 조치 과정으로 간주하십시오. 의사 결정 테이블의 각 행은 룰을 생성하기 위해 템플리트와 결합 된 데이터를 제공합니다.
+  
+  ##### 6.5.2 Overview
+  Decision tables are essentially a tool to generate DRL rules automatically.
+  
+  ##### 6.5.3. How Decision Tables Work
+  명심해야 할 핵심 사항은 의사 결정 테이블에서 각 행은 규칙이고 해당 행의 각 열은 해당 규칙에 대한 조건 또는 동작 중 하나입니다.
+  
+  
+  
+  #### 6.6 Logging
+  
+  ### 7. Running
+  
+  
+  
+  
+  
+  
   
 '''
 tags: []
