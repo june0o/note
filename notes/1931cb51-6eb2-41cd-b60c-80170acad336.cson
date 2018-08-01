@@ -1,5 +1,5 @@
 createdAt: "2018-07-09T05:37:19.487Z"
-updatedAt: "2018-07-13T06:39:00.463Z"
+updatedAt: "2018-07-18T06:06:43.686Z"
 type: "MARKDOWN_NOTE"
 folder: "78ec2c10b762f941f312"
 title: "drools-docs"
@@ -256,9 +256,207 @@ content: '''
   
   ### 7. Running
   
+  #### 7.7 Commands and the CommandExecutor
+  
+  BatchExecutionHelper는 위에 표시된 것처럼 결과 XML을 메시지 형식으로 사용할 수있는 배치 실행의 정렬을 지원하도록 구성된 XStream 인스턴스를 제공합니다. 구성된 변환기는 Command Factory를 통해 지원되는 명령에 대해서만 존재합니다. 사용자는 사용자 개체에 대해 다른 변환기를 추가 할 수 있습니다. 이는 특히 서비스가 관련 될 때 Stateless 또는 Stateful 지식 세션 스크립팅에 매우 유용합니다.
+  
+  ### 8. Rule Language Reference
+  Rule 언어 문법
+  
+  ### 9. Complex Event Processing
+  
+  ### 10. Decision Model and Notation
+  [Decision Model and Notation Ver1.1](https://www.omg.org/spec/DMN/1.1)
+  
+  ##### 10.1.1 Conformance Levels
+  * Conformance Level 1
+  의사 결정 요구 사항 다이어그램, 의사 결정 논리 및 의사 결정 테이블을 지원하려면 적합성 수준 1 구현이 필요하지만이 모델은 실행 가능할 필요가 없습니다. 자연스럽고 구조화되지 않은 언어를 비롯하여 모든 언어를 사용하여 표현식을 정의 할 수 있습니다.
+  
+  * Conformance Level 2
+  적합성 수준 2 구현은 적합성 수준 1과 동일하게 지원해야하지만 사양은 9 장에 정의 된 S-FEEL (Simplified FEEL) 언어를 사용하여 작성되어야하며 모델은 완전히 실행 가능해야합니다.
+  
+  * Conformance Level 3
+  적합성 수준 3 구현은 적합성 수준 2와 동일하게 지원해야하지만 사양 10 장에 정의 된대로 full FEEL 언어를 사용하여 표현할 수 있습니다. 구현은 박스형 표현의 전체 집합을 지원하고 완전히 실행 가능해야합니다.
+  
+  #### 10.3. Executing DMN services remotely on the Kie Server
+  이 절에서는 Kie 컨테이너에서 사용할 수있는 DMN 모델에 대한 의사 결정 서비스를 실행하기 위해 Kie 실행 서버에 배포 된 Kie 컨테이너와 상호 작용하는 방법을 설명합니다.
+  > Prerequisites
+  > 
+  - Kie Execution Server installed and configured
+  - Kie Execution Server에 배포 된 Kie 컨테이너 - 실행될 DMN 모델이 포함 된 KJAR 용
+  - 관련 Kie 실행 서버에 연결된 Kie Server Java 클라이언트
+  
+  > Procedure
+  > 
+  1. 관련 Kie 실행 서버에 연결된 Kie Server Java 클라이언트에서 DMNServicesClient 가져 오기
+  
+  
+      DMNServicesClient dmnClient = kieServicesClient.getServicesClient( DMNServicesClient.class );
+  
+  2. Execute the decision services for the desired model
+  
+  
+      DMNContext dmnContext = dmnClient.newContext();
+      dmnContext.set( "Full Name", "John Doe" ); 
+      ServiceResponse<DMNResult> serverResp = dmnClient.evaluateAll($containerId, 
+          $modelnamespace, $modelname,
+          dmnContext);
+      DMNResult dmnResult = serverResp.getResult(); 
+  
+  여기서 $ containerId는 DMN 모델이 포함 된 kjar이 배포 된 컨테이너의 ID이고 $ modelnamespace는 모델의 네임 스페이스이며 $ modelname은 모델의 이름입니다.
+  
+  이 시점에서 dmnResult에는 평가 된 DMN 모델의 모든 결정 결과가 포함됩니다.
+  
+  > Related Information
+  > 
+  - Installing the KIE Server. Ref. Installing the KIE Server
+  - Creating a Kie Container. Ref. Creating a Kie Container
+  - Kie Server Java Client API, describes also the required dependencies. Ref. Kie Server Java Client API
+  - Available Clients for the Decision Server. Ref. Available Clients for the Decision Server
+  
+  #### 10.4. FEEL Language Reference
+  FEEL: Friendly Enough Expression Language
+  스프레드 시트에서 표현식을 작성할 수있는 모든 사용자는 FEEL 표현식을 쉽게 작성할 수 있습니다.
+  
+  ##### 10.4.1. FEEL Language Semantics
+  ###### 10.4.1.1. Variable and Function Names
+  FEEL과 전통 언어의 가장 큰 차이점 중 하나는 FEEL의 변수 및 함수 이름의 일부로 공백과 일부 특수 문자를 지원한다는 것입니다.
+  
+  ### 12. Drools Commands
+  
+  
+  ### 13. CDI (Context Dependency Injection)
+  #### 13.1 Introduction
+  CDI, Contexts 및 Dependency Injection은 응용 프로그램에 선언적 컨트롤 및 구조체를 제공하는 Java 사양입니다. KIE는 프로그램 API를 사용할 필요없이 자동으로 인스턴스화하고 바인딩 할 수 있습니다.
+  
+  #### 13.2 Annotations
+  ##### 13.2.1 @KReleaseId
+  인스턴스를 특정 버전의 KieModule에 바인딩하는 데 사용됩니다. kie-ci가 클래스 경로에 있으면 원격 저장소에서 다운로드하여 종속성을 자동으로 해결합니다.
+  
+  ##### 13.2.2 @KContainer
+  @KContainer는 @Inject 및 변수 유형 유추를 사용하여 감지하고 추가 할 수 있으므로 선택 사항입니다.
+  * Injects Classpath KieContainer 
+   
+   
+      @Inject
+      private KieContainer kContainer;    
+  
+  * Injects KieContainer for Dynamic KieModule
+   
+   
+      @Inject
+      @KReleaseId(groupId = "jar1", artifactId = "art1", version = "1.1")
+      private KieContainer kContainer;
+  
+  * Injects named KieContainer for Dynamic KieModule
+  
+  
+      @Inject
+      @KContainer(name = "kc1")
+      @KReleaseId(groupId = "jar1", artifactId = "art1", version = "1.1")
+      private KieContainer kContainer;
+      
+  ##### 13.2.3. @KBase
+  @KBase는 @Inject 및 변수 유형 유추를 사용하여 감지하고 추가 할 수 있으므로 선택 사항입니다.
+  
+  ##### 13.2.4 @KSession for KieSession
+  @KSession는 @Inject 및 변수 유형 유추를 사용하여 감지하고 추가 할 수 있으므로 선택 사항입니다.
+  
+  The default argument, if given, maps to the value attribute and specifies the name of the KieSession from the kmodule.xml file
+  
+  * Side by side version loading for 'jar1.KBase1' KieBase
+  
+  
+      @Inject
+      @KSession("ksession1")
+      @KReleaseId( groupId = "jar1", artifactId = "art1", version = "1.0")
+      private KieSession ksessionv10;
+  
+      @Inject
+      @KSession("ksession1")
+      @KReleaseId( groupId = "jar1", artifactId = "art1", version = "1.1")
+      private KieSession ksessionv11;
+  
+  * CDI example for a named KieSession
+  
+  
+      @Inject
+      @KSession("ksession1")
+      KieSession kSession;
+  
+      public void go(PrintStream out) {
+          kSession.setGlobal("out", out);
+          kSession.insert(new Message("Dave", "Hello, HAL. Do you read me, HAL?"));
+          kSession.fireAllRules();
+      }
+  
+  ### 14. Integration with Spring
+  
+  ##### 14.2.7.6. IMPORTANT NOTE
+  Annotations 이 사용되는 경우, kmodule 객체 (kbase / ksession)를 적절하게 초기화하려면 org.kie.spring.annotations.KModuleAnnotationPostProcessor 유형의 bean을 정의해야합니다
+  
+  * kie-spring annotations post processor bean definition
+  
+  
+      <bean id="kiePostProcessor" class="org.kie.spring.annotations.KModuleAnnotationPostProcessor"/>
+  
+  * kie-spring annotations - Component Scanning
+  
+  
+      <context:component-scan base-package="org.kie.spring.annotations"/>
+  
+  #### 14.2.8 Event Listeners
+  Drools supports adding 3 types of listeners to KieSessions - AgendaListener, WorkingMemoryListener, ProcessEventListener
+  
+  The kie-spring module allows you to configure these listeners to KieSessions using XML tags. These tags have identical names as the actual listener interfaces i.e., <kie:agendaEventListener..>, <kie:ruleRuntimeEventListener...> and <kie:processEventListener...>.
+  
+  * Example 198. Listener configuration example - using a bean:ref.
+  * Example 199. Listener configuration example - using nested bean.
+  * Example 200. Listener configuration example - defaulting to the debugversions provided by the Knowledge-API .
+  * Example 201. Listener configuration example - mix and match of’ref'/nested-bean/empty styles.
+  * Example 202. Listener configuration example - multiple listeners of thesame type.
+  
+  #### 14.2.9. Loggers
+  Drools supports adding 2 types of loggers to KieSessions - ConsoleLogger, FileLogger.
+  
+  #### 14.2.10. Defining Batch Commands
+  A < kie : batch > element can be used to define a set of batch commands for a given ksession.
+  이 태그는 속성이 없으며 <kie : ksession ...> 요소 바로 아래에 있어야합니다. 지원되는 명령은 다음과 같습니다.
+  
+  #### 14.2.11. Persistence
+  
+  #### 14.2.12. Leveraging Other Spring Features
+  
+  ### 14.3. Integration with jBPM Human Task
+  이 장에서는 Spring을 사용하여 휴먼 타스크 서버를 구성 할 때 사용되는 infrastructure 에 대해 설명합니다.
   
   
   
+  ### 17. Apache Camel Integration
+  Camel은 Drools에 정보를 입출력하기위한 경량 버스 프레임 워크를 제공합니다.
+  Drools는 쉽게 통합 할 수 있도록 두 가지 요소를 도입했습니다.
+  * Drools Policy
+  JAXB 또는 XStream 데이터 로더를 확장합니다. JAXB의 경우 컨텍스트 경로와 관련된 drools 관련 경로를 추가합니다. XStream의 경우 Drools 클래스의 사용자 정의 변환기와 별칭을 추가합니다. 또한 ClassLoader를 대상 ksession으로 설정하는 작업도 처리합니다.
+  
+  * Drools Endpoint
+  지정된 drools 세션에 대해 페이로드를 실행합니다.
+  
+  ### 18. Drools Camel Server
+  drools camel server (drools-camel-server) 모듈은 모든 종류의 클라이언트 애플리케이션을 위해 원격으로 KnowledgeBases를 실행하기 위해 배포 할 수있는 war(Web Application Resource or Web application ARchive) 입니다. 이것은 JVM 애플리케이션 클라이언트에 국한되지 않고 REST 인터페이스를 통해 HTTP를 사용할 수있는 모든 기술입니다. 이 버전의 실행 서버는 고유 한 방식으로 상태 비 저장 및 상태 저장 세션을 지원합니다.
+  
+  ### 20. Workbench (General)
+  #### 20.1 Installation
+  응용 프로그램 서버에 해당하는 Workbench Distribution Zip의 war를 사용하십시오.
+  - eap7: tailored for Red Hat JBoss Enterprise Application Platform 7
+  - tomcat8: tailored for Apache Tomcat 8
+  - wildfly11: tailored for Wildfly 11
+  
+  #### 20.2 Quick Start
+  
+  
+  ### 24. KIE Execution Server
+  #### 24.1 Overview
+  Kie Server는 규칙 및 프로세스를 인스턴스화하고 실행하는 데 사용할 수있는 모듈 식 독립형 서버 구성 요소입니다. REST, JMS 및 Java 인터페이스를 통해 클라이언트 응용 프로그램에이 기능을 제공합니다. 또한 Kie Workbench와 완벽하게 통합됩니다.
   
   
   

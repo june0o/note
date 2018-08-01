@@ -1,0 +1,29 @@
+createdAt: "2018-07-20T05:38:58.414Z"
+updatedAt: "2018-07-20T05:57:37.205Z"
+type: "MARKDOWN_NOTE"
+folder: "78ec2c10b762f941f312"
+title: "Trouble shooting :soccer:"
+content: '''
+  ## Trouble shooting :soccer:
+  
+  ### 1. ProcessTest 
+  #### 1) 프로젝트 생성
+  * New > Drools Project > 2번째(HelloProject 내장) Project contents 선택
+  * ProcessTest.java 커서 두고 오른 버튼 > Run As > Java Application 선택
+  #### 2) 아래와 같은 NullPointerException 에러 발생!
+  
+  ![pic_processTest_error.png](:storage/c5950a7d-d248-4b85-b364-512c01ecfeaf/9ab75127.png)
+  
+  #### 3) 원인: jBPM Library path 가 안 잡혀 있어 발생하는 것.
+  #### 4) 해결 :bread:
+  .classpath 파일에 아래 추가
+  
+      <classpathentry kind="con" path="JBPM/jbpm"/>
+  
+  이클립스에서 수정하는 방법도 있을 것 같은데 모르겠음..
+  
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false

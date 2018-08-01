@@ -1,5 +1,5 @@
 createdAt: "2018-07-04T09:24:51.955Z"
-updatedAt: "2018-07-05T04:33:09.518Z"
+updatedAt: "2018-07-17T10:02:45.419Z"
 type: "MARKDOWN_NOTE"
 folder: "78ec2c10b762f941f312"
 title: "참고 사이트"
@@ -10,6 +10,18 @@ content: '''
   * [Processes, Rules and Events: 2018](http://kverlaen.blogspot.com/2018/)
   
   * [Building Self Service Applications with jBPM 7.x YouTube](https://www.youtube.com/watch?v=Uy83kmVcWpw)
+  
+  * [[JPA] JPA란 무엇인가?](http://blog.woniper.net/255?category=531455)
+  
+  * ### JPA (Java Persistent Api)
+  JPA는 여러 ORM 전문가가 참여한 EJB 3.0 스펙 작업에서 기존 EJB ORM이던 Entity Bean을 JPA라고 바꾸고 JavaSE, JavaEE를 위한 영속성(persistence) 관리와 ORM을 위한 표준 기술이다. JPA는 ORM 표준 기술로 Hibernate, OpenJPA, EclipseLink, TopLink Essentials과 같은 구현체가 있고 이에 표준 인터페이스가 바로 JPA이다.
+  
+  * [Decision Model and Notation Ver1.1](https://www.omg.org/spec/DMN/1.1)
+  * ### DMN (Decision Model and Notation)
+  DMN의 목적은 의사 결정을 모델링하는 데 필요한 구조를 제공하여 조직의 의사 결정을 내리는 것입니다
+  비즈니스 분석가가 정확하게 정의한 다이어그램과 (선택적으로) 자동화 된 다이어그램으로 쉽게 나타낼 수 있습니다.
+  
+  
   
 '''
 tags: []
