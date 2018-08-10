@@ -1,0 +1,27 @@
+createdAt: "2018-08-01T01:36:31.345Z"
+updatedAt: "2018-08-01T07:21:53.744Z"
+type: "MARKDOWN_NOTE"
+folder: "9544ae246cabb3aaa2ae"
+title: "BSP-APNS 연동 JWT 인증 개발"
+content: '''
+  ### BSP-APNS 연동 JWT 인증 개발
+  > Todo List 
+  - java 에서 JWT token 생성 구현
+    - eclipse 환경에서 구현
+  - c/c++ 에서 java class 호출부 구현
+  - c/c++ api 작성. library 로 묶기.
+  
+  > java 에서 JWT token 생성 
+  - PUSHY library 를 사용하여 생성 확인
+  - c++ 에서 호출 가능한 것 확인.
+    - java 파일 컴파일 시 외부 jar 파일 path 잡아서 빌드해야 하고,
+  
+      $ javac -classpath "./pushy-0.13.3.jar;./netty-all-4.1.25.Final.jar;./gson-2.8.5.jar" PusyhLibrary.java
+    - jvm 에 올릴 때도 classpath 에 외부 jar 파일 설정해야 한다.
+    options[0].optionString = "-Djava.class.path=.;./pushy-0.13.3.jar;./netty-all-4.1.25.Final.jar;./gson-2.8.5.jar";
+    
+    
+'''
+tags: []
+isStarred: false
+isTrashed: false

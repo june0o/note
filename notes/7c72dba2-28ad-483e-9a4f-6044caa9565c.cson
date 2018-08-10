@@ -1,0 +1,56 @@
+createdAt: "2018-08-01T00:59:33.391Z"
+updatedAt: "2018-08-01T09:15:21.918Z"
+type: "MARKDOWN_NOTE"
+folder: "9544ae246cabb3aaa2ae"
+title: "PUSHY Library :tangerine:"
+content: '''
+  ## PUSHY Library :tangerine:
+  
+  ### 1. 소스 코드
+  [GitHub - A Java library for sending APNs push notifications](https://github.com/relayrides/pushy) 
+  
+  ### 2. 준비
+  - 라이브러리 다운로드
+  : maven 에서 jar 파일 다운로드.
+  [Maven Repository: com.turo » pushy » 0.13.3](https://mvnrepository.com/artifact/com.turo/pushy/0.13.3)
+  
+  - 추가 라이브러리 다운로드
+  : pushy 내에서 사용하는 라이브러리(netty, gson)가 추가로 필요함
+  [Maven Repository: io.netty » netty-all » 4.1.25.Final](https://mvnrepository.com/artifact/io.netty/netty-all/4.1.25.Final)
+  [Maven Repository: com.google.code.gson » gson » 2.8.5](https://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.5)
+  
+  ### 3. 사용법
+  : GitHub 소스코드를 참고하여 만듬. 사용법은 간단.
+  
+  > private key(.p8) 파일 로드
+  > 
+      ApnsSigningKey signingKey = ApnsSigningKey.loadFromPkcs8File(new File(keyPath), iss, kid);
+  
+  > Token 생성
+  > 
+      AuthenticationToken authToken = new AuthenticationToken(signingKey, new Date());
+      String token = authToken.toString();
+  
+  ### 4. 확인
+  [JSON Web Tokens - jwt.io](https://jwt.io/) Debugger 탭에서 
+  좌측 Encoded 영역에 토큰 값을 넣고, 
+  이 사이트 말고도 pushy 코드상으로도 확인할 수 있는데, 어찌됐건 public key(.p8) 가 있어야 함!
+  
+  ### 5. 내부 코드 파악
+  #### 1) .p8 파일 로드 후 private key 추출
+  ApnsSigningKey.loadFromPkcs8File(new File(keyPath), teamId, keyId); 호출.
+  -- 함수 내부에서 하는 일 --
+  파일을 한 줄씩 읽음.
+  BEGIN PRIVATE KEY, END PRIVATE KEY 를 제외한 줄을 append
+  base64 decoding -> byte[] 로 변환
+  PKCS8EncodingKeySpec 인자로 넣어 keySpec 생성
+  
+  
+  
+  #### 2) Token 생성
+  
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false

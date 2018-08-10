@@ -34,6 +34,11 @@
       "key": "e52ea16ddda0e47c89cb",
       "color": "#f5a623",
       "name": "TURN IPv6"
+    },
+    {
+      "key": "9544ae246cabb3aaa2ae",
+      "color": "#FF8E00",
+      "name": "JWT"
     }
   ],
   "version": "1.0"

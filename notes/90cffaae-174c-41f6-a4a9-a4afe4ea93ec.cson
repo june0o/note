@@ -1,0 +1,90 @@
+createdAt: "2018-08-10T01:45:01.628Z"
+updatedAt: "2018-08-10T04:52:06.983Z"
+type: "MARKDOWN_NOTE"
+folder: "9544ae246cabb3aaa2ae"
+title: "C/C++ 에서 Java 호출하기 - 기본편 :seedling:"
+content: '''
+  ## C/C++ 에서 Java 호출하기 - 기본편 :seedling:
+  
+  : C/C++ 에서 Java api 를 호출하는 가장 간단한 방법에 대해 알아봅니다.
+  
+  ### 0. 개요
+  -  Java 작성 및 빌드
+  -  C/C++ 에서 Java 호출 코드 작성
+  -  빌드 및 테스트
+  
+  ### 1. Java 작성 및 빌드
+  : JDK 는 1.7버전을 사용하고 설치는 xx 문서를 참고합니다.
+  #### 1) Hello world 를 출력하는 class 를 하나 작성합니다.
+  
+      public class Hello {
+          public static void test() {
+              System.out.println("Hello world");
+          }
+      }
+  
+  #### 2) 빌드하여 Hello.class 가 생성되는 것을 확인 합니다.
+  
+      $ javac Hello.java
+       
+  ### 2. C/C++ 에서 Java 호출 코드 작성
+  #### 1) jvm 생성 및 java class 찾기
+  : jvm 을 생성하고, class.path 로 지정된 위치에서 java class 를 찾는다.
+  
+  	printf("JVM Create Start!!\\n");
+  
+  	JavaVM *jvm;
+  	JNIEnv *env;
+  	jclass cls;
+  	JavaVMOption options[1];
+  	JavaVMInitArgs vm_args;
+  
+  	options[0].optionString = "-Djava.class.path=.";
+  	memset(&vm_args, 0, sizeof(vm_args));
+  	vm_args.version = JNI_VERSION_1_6;
+  	vm_args.nOptions = 1;
+  	vm_args.options = options;
+    
+  	long jvm_status = JNI_CreateJavaVM(&jvm, (void**)&env, &vm_args);
+  	if (jvm_status != JNI_ERR)
+  	{
+  	    cls = env->FindClass("Hello");
+  	}
+  
+  	if (cls != 0) 
+  	{
+  	    printf("Find class!\\n");
+  	}
+      
+  #### 2) java api 호출
+  : Hello class 의 test api를 호출한다.
+  
+  	if (g_cls != 0)
+  	{
+  		// Use the static method start
+  		mid = g_env->GetStaticMethodID(g_cls, "test", "()");
+  		if (mid != 0)
+  		{
+  		    g_env->CallStaticVoidMethod(g_cls, mid);
+  		}
+  		else
+  		{
+  		    printf("mid error\\n");
+  		    return false;
+  		}
+  	}
+  
+  #### 3) jvm 소멸
+  
+  	g_jvm->DestroyJavaVM();
+  
+  ### 3. 빌드 및 테스트
+  #### 1) window 환경
+  
+  #### 2) linux 환경
+  
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false

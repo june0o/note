@@ -1,0 +1,71 @@
+createdAt: "2018-08-01T07:24:50.607Z"
+updatedAt: "2018-08-01T09:04:24.847Z"
+type: "SNIPPET_NOTE"
+folder: "9544ae246cabb3aaa2ae"
+title: "JWT 구현"
+description: "JWT 구현"
+snippets: [
+  {
+    name: "JwtJava.java"
+    mode: "Java"
+    content: '''
+      // JWT java 로만 구현
+      public class JwtJava {
+      
+        public static String createToken(String alg, String kid, String iss, String keyPath) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, InvalidKeySpecException {
+      		
+      		long nowMillis = System.currentTimeMillis() / 1000;
+      		
+      		String header = "{\\"alg\\" : \\"" + alg + "\\", \\"kid\\" : \\"" + kid + "\\"}";
+      		String payload = "{\\"iss\\": \\"" + iss + "\\", \\"iat\\" : " + nowMillis + "}";
+      		
+      		String headerBase64 = new String(Base64.getEncoder().encode(header.getBytes(StandardCharsets.UTF_8)));
+      		String payloadBase64 = new String(Base64.getEncoder().encode(payload.getBytes(StandardCharsets.UTF_8)));
+      		String part1 = headerBase64 + "." + payloadBase64;
+      		
+      		BufferedReader bufReader = null;
+      		String secret = "";
+      
+      		try {
+      			String currentLine;
+      			bufReader = new BufferedReader(new FileReader(keyPath));
+      			while ((currentLine = bufReader.readLine()) != null) {
+      				if (!currentLine.startsWith("-----")) {
+      					secret += currentLine;
+      				}
+      			}
+      			bufReader.close();
+      		} catch (Exception e) {
+      			// TODO Auto-generated catch block
+      			e.printStackTrace();
+      		}
+      		System.out.println("# secret: " +secret);		
+      
+      		String token = headerBase64 + "." + payloadBase64 + "." + ES256(secret, part1);
+      		System.out.println("+ token: " +token);
+      		
+      		return token;
+      	}
+      	
+      	private static String ES256(final String secret, final String data) throws NoSuchAlgorithmException, SignatureException, InvalidKeySpecException, InvalidKeyException {
+      		
+      		KeyFactory keyFactory;
+      		keyFactory = KeyFactory.getInstance("EC");
+      		KeySpec keySpec = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(secret));
+      		PrivateKey key;
+      		key = keyFactory.generatePrivate(keySpec);
+      
+          final Signature sha256withECDSA = Signature.getInstance("SHA256withECDSA");
+      		sha256withECDSA.initSign(key);
+      		sha256withECDSA.update(data.getBytes(StandardCharsets.UTF_8));
+      
+      		final byte[] signed = sha256withECDSA.sign();
+      		return Base64.getEncoder().encodeToString(signed).replaceAll("=", "");
+      	}
+      }
+    '''
+  }
+]
+tags: []
+isStarred: false
+isTrashed: false
