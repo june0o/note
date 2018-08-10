@@ -1,0 +1,31 @@
+createdAt: "2018-07-08T00:13:48.796Z"
+updatedAt: "2018-07-08T00:26:25.027Z"
+type: "MARKDOWN_NOTE"
+folder: "8418a8fedcdbc1e2a377"
+title: "개발 환경 설정 :banana:"
+content: '''
+  ## 개발 환경 설정 :banana:
+  
+  ### 1. Oracle
+  아래 두 파일을 다운 받는다.
+  - Oracle Database Express Edition 11g Release 2
+  - SQL Developer 18.2 (Windows 64-bit with JDK 9 included)
+  
+  > Oracle 11g Express 설치
+  > 
+  파일 다운로드시 회원 가입 필요.
+  압축 해제 후 setup.exe 실행하여 설치
+  
+  
+  
+  ### 2. Tomcat 
+  
+  ### 3. Spring STS
+  
+  
+'''
+tags: [
+  "mybatis"
+]
+isStarred: false
+isTrashed: false
