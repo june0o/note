@@ -1,5 +1,5 @@
 createdAt: "2018-08-14T02:34:33.387Z"
-updatedAt: "2018-08-14T06:24:13.671Z"
+updatedAt: "2018-08-14T08:49:58.529Z"
 type: "MARKDOWN_NOTE"
 folder: "9544ae246cabb3aaa2ae"
 title: "C/C++ 에서 Java 호출하기 - 실전편 :deciduous_tree:"
@@ -64,8 +64,10 @@ content: '''
   기본적인 세팅이 끝났네요. 이제 라이브러리를 호출해 보아요.
   
   #### 3) Java 코드 작성
+  - JwtPushy 클래스를 하나 생성했어요. package 는 default. 
+  package 를 설정하면 c에서 호출시 설정이 필요한 거 같더라고요... 귀찮으니 default 로 사용
   - kid(key id), iss(issuer) 와 .p8 개인키 경로를 입력받는 Api 작성
-  algorithm 은 pushy 내부에서 ES256을 항상 사용하고 있다.
+  algorithm 은 pushy 내부에서 ES256을 항상 사용하고 있어요.
   
   
   	public static String createToken(String kid, String iss, String keyPath) {
@@ -116,20 +118,97 @@ content: '''
   
   - Token 값 확인 
   [JSON Web Tokens](https://jwt.io/) 에서 Token 을 복사 & 붙여넣기 하여 확인.
-  But, public key와 private key가 둘 다 있어야 valid 한 지 알 수 있다.
+  But, public key와 private key가 둘 다 있어야 valid 한 지 알 수 있어요.
   ![스크린샷 2018-08-14 오후 3.13.40.png](:storage/0b670d68-528e-4492-8e20-201b87bdf57c/34618e21.png)
   
   #### 4) 빌드
-  Eclipe 에서 jar 파일로 만드는 것이 javac 로 빌드하는 것보다 편한 것 같다. (Library path 를 넣고 빌드해야 함..)
+  Eclipe 에서 jar 파일로 만드는 것이 javac 로 빌드하는 것보다 편한 것 같아요. (javac 로 빌드 시 Library path 를 다 넣고 빌드해야 해서..)
   Test 코드는 주석처리 하고, 
   소스파일 선택 후 오른 버튼 클릭 Export > Java > JAR file 선택 후 Next
-  JAR file 이름을 적당히 주고 Finish 클릭! .jar 생성된 것 확인!
+  JAR file 이름을 적당히 주고 Finish 클릭! JwtPushy.jar 생성된 것 확인!
   
   ### 3. C/C++ 에서 Java 호출 코드 작성
+  : 기본편과 거의 비슷한데 library 지정하는 부분과 파라메터 설정하는 부분이 조금 달라요.
   
+  #### 1) jvm 생성 및 java class 찾기
+  : jvm 을 생성하고, class.path 로 지정된 위치에서 java class 를 찾는다.
+  
+  	JavaVM *jvm;
+  	JNIEnv *env;
+  	jclass cls;
+  	JavaVMOption options[1];
+  	JavaVMInitArgs vm_args;
+  
+  	// 사용하는 라이브러리를 하나하나 지정해 줘야 함! 
+  	// window(;) 와 linux path(:) 구분자가 다름.
+  	#if _WIN32
+  		options[0].optionString = "-Djava.class.path=.;"
+  		"./libs/jwtPushy.jar;./libs/pushy-0.13.3.jar;./libs/netty-all-4.1.25.Final.jar;./libs/gson-2.8.5.jar";
+  	#else
+  		options[0].optionString = "-Djava.class.path=.:"
+  		"./libs/jwtPushy.jar:./libs/pushy-0.13.3.jar:./libs/netty-all-4.1.25.Final.jar:./libs/gson-2.8.5.jar";
+  	#endif
+  
+  	memset(&vm_args, 0, sizeof(vm_args));
+  	vm_args.version = JNI_VERSION_1_6;
+  	vm_args.nOptions = 1;
+  	vm_args.options = options;
+  
+  	long jvm_status = JNI_CreateJavaVM(&jvm, (void**)&env, &vm_args);
+  	if (jvm_status != JNI_ERR)
+  	{
+  		cls = env->FindClass("JwtPushy");
+  	}
+  
+  #### 2) java api 호출
+  : JwtPushy class 의 createToken api를 호출한다.
+  
+  	if (cls != 0)
+  	{
+  		printf("Find class!\\n");
+  
+  		// Use the static method start
+  		char* sKid = "6LZUYWW256";
+  		char* sIss = "66L6N269KD";
+  		char* sKEY_PATH = "./APNS-AuthKey.p8";
+  		jstring kid = env->NewStringUTF(sKid);
+  		jstring iss = env->NewStringUTF(sIss);
+  		jstring KEY_PATH = env->NewStringUTF(sKEY_PATH);
+  
+  		jmethodID mid = env->GetStaticMethodID(cls, "createToken", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;");
+  		if (mid != 0)
+  		{
+  			jstring token = (jstring)env->CallStaticObjectMethod(cls, mid, kid, iss, KEY_PATH);
+  			const char* sToken = env->GetStringUTFChars(token, NULL);
+  
+  			printf("\\ncreateToken: %s\\n", sToken);
+  			env->ReleaseStringUTFChars(token, sToken);
+  		}
+  		else
+  		{
+  			printf("mid error\\n");
+  		}
+  	}
   
   ### 4. 빌드 및 테스트 (window, linux)
+  : library path 설정은 기본편을 참고해 주세요.
+  #### 1) window 환경 (x64)
+  - 빌드 후 실행
   
+  Token 값이 출력되는 것 확인.
+  ![run_win32_pushy.png](:storage\\0b670d68-528e-4492-8e20-201b87bdf57c\\76cc50a7.png)
+  
+  #### 2) linux 환경
+  - make 후 실행
+  
+  Token 값이 출력되는 것 확인.
+  ![run_linux_pushy.png](:storage\\0b670d68-528e-4492-8e20-201b87bdf57c\\7bc4690f.png)
+  
+  #### :honey_pot: Tip.
+  - Linux 는 OS 에 상관 없이 잘 돌아간다. (CentOs6.x, redhat, ubuntu18.04 에서 확인) 
+  - But, openJDK 를 사용하면 정상 동작하지 않는다. 인증 관련 라이브러리가 빠져 있는듯 하다.
+  openJDK 에도 libjvm.so 와 jni.h 가 같은 경로에 있길래 다운 받기 귀찮아 path 잡아서 사용해 봤는데... 
+  실행시 오류가 발생하여 수렁에 빠질 뻔 했다. oracle 사이트에서 java 버전 설치하니 정상 동작!
   
 '''
 tags: []
