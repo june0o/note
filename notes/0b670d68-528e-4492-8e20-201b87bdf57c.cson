@@ -1,0 +1,137 @@
+createdAt: "2018-08-14T02:34:33.387Z"
+updatedAt: "2018-08-14T06:24:13.671Z"
+type: "MARKDOWN_NOTE"
+folder: "9544ae246cabb3aaa2ae"
+title: "C/C++ 에서 Java 호출하기 - 실전편 :deciduous_tree:"
+content: '''
+  ## C/C++ 에서 Java 호출하기 - 실전편 :deciduous_tree:
+  
+  : C/C++ 에서 Java Open Source Library(PUSHY) 를 호출하는 방법에 대해 알아봅니다.
+  APNS 가이드에 맞게 JWT 을 만들어야 하는데 적당한 C/C++ library 를 찾지 못해 Java Library를 호출하여 구현해 봤어요.
+  
+  ### 0. 개요
+  -  JWT 란
+  -  Java 작성 및 빌드
+  -  C/C++ 에서 Java 호출 코드 작성
+  -  빌드 및 테스트 (window, linux)
+  
+  ### 1. JWT 란
+  : 간단하게 JWT 가 무엇인지 알아보고 참고 사이트를 소개합니다.
+  #### 1) 정의 
+  Json Web Token 의 약자로 RFC 7519에 정의 되어 있고, 두 개체에서 JSON 객체를 사용하여 가볍고 자가수용적인 방식으로 정보를 안정성 있게 전달해 주는 방식
+  
+  #### 2) 참고 사이트
+  - 더 자세한 내용은 [[JWT] JSON Web Token 소개 및 구조](https://velopert.com/2389)
+  - [JSON Web Tokens - jwt.io](https://jwt.io/) 에서 생성한 토큰 값이 valid 한지 확인 할 수 있어요. 
+  그리고 언어별(C/C++, Java, Javascript, Python 등)로 Library도 소개하고 있고요.
+  
+  ### 2. Java 작성 및 빌드
+  : Pushy 라이브러리를 이용하여 Java 코드를 작성하고 빌드(jar 파일) 방법에 대해 알아봅니다.
+  
+  #### 1) Eclipe 에서 빈 프로젝트 생성
+  New > Java Project > Project Name(ex. JwtTokenTest) 입력 후 Finish 
+  2019년 1월부터 Java1.8이 유료화 된다는 이야기가 있어 Java1.7을 선택했어요.
+  ![스크린샷 2018-08-14 오후 2.00.21.png](:storage/0b670d68-528e-4492-8e20-201b87bdf57c/6555da99.png)
+  
+  #### 2) Pushy 라이브러리 이용하기
+  > 라이브러리 다운 받기
+  > 
+  
+  소스는 아래 github에 있어요. 
+  [GitHub - relayrides/pushy: A Java library for sending APNs (iOS/macOS/Safari) push notifications](https://github.com/relayrides/pushy)
+  
+  제가 필요한 것은 jar형태의 라이브러리인데, github에 친절하게 설명되어 있네요.
+  ![스크린샷 2018-08-14 오후 2.21.49.png](:storage/0b670d68-528e-4492-8e20-201b87bdf57c/a32923cf.png)
+  
+  download Pushy as a .jar file 을 클릭하면 pushy-0.13.3.jar 를 get할 수 있어요.
+  그리고 pushy 안에서 사용하는 라이브러리를 추가적으로(netty, gson) 다운로드 받아야 해요!
+  
+  :star: Maven repository 에서 라이브러리 jar 파일 다운 받기
+    - [Maven Repository](https://mvnrepository.com/) 접속
+    - netty 검색하면 같은 이름이 여러개 검색되는데,
+    - io.netty » netty-all 를 선택
+    - github에서 알려준 버전(4.1.25)을 선택 해요.
+    - Files 항목 jar 클릭하여 다운 받기. (netty-all-4.1.25.Final.jar)
+  ![스크린샷 2018-08-14 오후 2.32.15.png](:storage/0b670d68-528e-4492-8e20-201b87bdf57c/0a27b917.png)
+  
+    - 마찬가지 방법으로 gson 2.6버전도 다운로드 받아주세요.
+  
+  > 프로젝트에 라이브러리 추가하기
+  > 
+  
+  Project Properties > Java Build Path > Libraries Tab 에서 
+  pushy, netty, gson jar 파일 선택, (옵션) 테스트를 위해 Junit library 도 추가
+  기본적인 세팅이 끝났네요. 이제 라이브러리를 호출해 보아요.
+  
+  #### 3) Java 코드 작성
+  - kid(key id), iss(issuer) 와 .p8 개인키 경로를 입력받는 Api 작성
+  algorithm 은 pushy 내부에서 ES256을 항상 사용하고 있다.
+  
+  
+  	public static String createToken(String kid, String iss, String keyPath) {
+  		
+  		System.out.println("[pushy] createToken ===");
+  		ApnsSigningKey signingKey;
+  		String token = null;
+  		try {
+  			signingKey = ApnsSigningKey.loadFromPkcs8File(new File(keyPath), iss, kid);
+  			Date issuedAt = new Date();
+  			AuthenticationToken authToken = new AuthenticationToken(signingKey, issuedAt);
+  			token = authToken.toString();
+  		} catch (Exception e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  		}
+  		
+  		System.out.println("+ token: " + token);		
+  		return token;
+  	}
+  
+  - 테스트 코드 작성
+  위에서 작성한 createToken 을 검증하는 코드 작성
+  
+  
+  	@Test
+  	public void pushyTest() {
+  		
+  		// String alg = "ES256";
+  		String kid = "6LZUYWW256";
+  		String iss = "66L6N269KD";
+  		String KEY_PATH = JwtPushy.class.getResource("").getPath() + "../lib/APNS-AuthKey.p8";
+  
+  		try {
+  			String token = createToken(kid, iss, KEY_PATH);
+  		} catch (Exception e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  		}
+  	}
+    
+  - Jnit 실행
+  Run As > JUnit Test 로 실행하면 Console 창에 token이 출력되고, 
+  
+  
+      [pushy] createToken ===
+      + token: eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjZMWlVZV1cyNTYifQ.eyJpc3MiOiI2Nkw2TjI2OUtEIiwiaWF0IjoxNTM0MjI2NTMyfQ.MEQCICMi5kxNv2AXxkzs3xbqUidoPlmRLB0ZXLKDKTxm6c1hAiAqo0gVtF1adWndHhxFKvAbFgnr2E8JxAk_80umhLmLfQ
+  
+  - Token 값 확인 
+  [JSON Web Tokens](https://jwt.io/) 에서 Token 을 복사 & 붙여넣기 하여 확인.
+  But, public key와 private key가 둘 다 있어야 valid 한 지 알 수 있다.
+  ![스크린샷 2018-08-14 오후 3.13.40.png](:storage/0b670d68-528e-4492-8e20-201b87bdf57c/34618e21.png)
+  
+  #### 4) 빌드
+  Eclipe 에서 jar 파일로 만드는 것이 javac 로 빌드하는 것보다 편한 것 같다. (Library path 를 넣고 빌드해야 함..)
+  Test 코드는 주석처리 하고, 
+  소스파일 선택 후 오른 버튼 클릭 Export > Java > JAR file 선택 후 Next
+  JAR file 이름을 적당히 주고 Finish 클릭! .jar 생성된 것 확인!
+  
+  ### 3. C/C++ 에서 Java 호출 코드 작성
+  
+  
+  ### 4. 빌드 및 테스트 (window, linux)
+  
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
