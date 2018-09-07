@@ -39,6 +39,16 @@
       "key": "9544ae246cabb3aaa2ae",
       "color": "#FF8E00",
       "name": "JWT"
+    },
+    {
+      "key": "484b44b44387f9909a91",
+      "color": "#E10051",
+      "name": "English"
+    },
+    {
+      "key": "dcb9e4ff3b96fbadcec9",
+      "color": "#2BA5F7",
+      "name": "JavaScript"
     }
   ],
   "version": "1.0"

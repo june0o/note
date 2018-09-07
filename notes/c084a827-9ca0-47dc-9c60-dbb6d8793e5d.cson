@@ -1,0 +1,82 @@
+createdAt: "2018-09-06T06:47:11.331Z"
+updatedAt: "2018-09-06T08:50:57.524Z"
+type: "MARKDOWN_NOTE"
+folder: "dcb9e4ff3b96fbadcec9"
+title: "기본 문법 :baseball:"
+content: '''
+  ### 기본 문법 :baseball:
+  
+  더 자세한 내용은 ...
+  [자바스크립트 사전 - 생활코딩](https://opentutorials.org/course/50/37)
+  
+  - 숫자
+  | Math | Result| Comment|
+  |---|---|---|
+  | Math.pow(3,2)| 9| 3의 2승|
+  | Math.round(10.6)| 11| 반올림|
+  | Math.ceil(10.2)| 11| 올림|
+  | Math.floor(10.6)| 10| 내림|
+  | Math.sqrt(9)| 3| 제곱근|
+  | Math.random()| 0.3| 0~1.0 사이의 랜덤한 숫자|
+  
+  - 문장 끝
+  JavaScript에서는 세미콜론을 생략할 수 있는데, 이 경우 줄바꿈을 명령의 끝으로 간주하게 된다.
+  
+  
+  - 비교
+  | 연산자 | 이름| Comment|
+  |---|---|---|
+  | ==| 동등 연산자| 좌항과 우항을 비교해서 서로 값이 같으면 true, 다르면 false|
+  | ===| 일치 연산자| 좌항과 우항이 '정확'하게 같을 때 true, 다르면 false|
+  | !=| | 같지 않으면 true, 같으면 false|
+  | !==| |정확하게 같지 않으면 true, 같으면 false |
+  
+  - 조건문
+  if, if ~ else, if ~ else if ~ else
+  
+  - false 로 간주되는 데이터 형
+  '' 빈 문자열
+  undefined
+  값이 할당되지 않은 변수
+  null
+  NaN
+  
+  
+  - 함수를 정의하는 또 다른 방법
+  
+  
+      var numbering = function (){
+          i = 0;
+          while(i < 10){
+              document.write(i);
+              i += 1;
+          }
+      }
+  
+  - 배열
+  
+  | 연산자 | Comment| 예|
+  |---|---|---|
+  | push| 배열 끝에 원소 추가| li.push('f');|
+  | concat| 복수의 원소를 배열에 추가| li.concat(['f', 'g']);|
+  | unshift| 배열의 시작점에 원소 추가| li.unshift('z');|
+  | splice| a번째 위치에 b개 원소 제거 후 원소 추가| li.splice(2, 0, 'B');|
+  | shift| 첫번째 원소 제거| li.shift();|
+  | pop| 마지막 원소 제거| li.pop();|
+  | sort| 원소 정렬| li.sort();|
+  | reverse| 원소 역순 정렬| li.reverse();|
+  
+  
+  - 객체
+  
+  
+      var grades = {'egoing': 10, 'k8805': 6, 'sorialgi': 80};
+      
+      for(key in grades) {
+          document.write("key : "+key+" value : "+grades[key]+"<br />");
+      }
+      
+'''
+tags: []
+isStarred: false
+isTrashed: false

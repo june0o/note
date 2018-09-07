@@ -1,0 +1,22 @@
+createdAt: "2018-09-06T07:25:04.590Z"
+updatedAt: "2018-09-06T07:34:37.177Z"
+type: "MARKDOWN_NOTE"
+folder: "dcb9e4ff3b96fbadcec9"
+title: "Tip :santa:"
+content: '''
+  ### Tip :santa:
+  
+  - 입력창
+  : 입력 메시지와 입력창이 표시된다.
+  
+  id = prompt('아이디 입력해주세요. ');
+  
+  - web page 메시지 출력
+  : web page 에 출력된다.
+  
+  document.write('Hello World :D');
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
