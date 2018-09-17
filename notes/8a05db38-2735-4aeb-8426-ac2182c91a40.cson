@@ -1,0 +1,44 @@
+createdAt: "2018-09-10T05:04:03.928Z"
+updatedAt: "2018-09-17T02:30:35.720Z"
+type: "MARKDOWN_NOTE"
+folder: "6c4c627ad430495f5a91"
+title: "C/C++ WEBASSEMBLY :orange:"
+content: '''
+  ### C/C++ WEBASSEMBLY :orange:
+  : c/c++ 컴파일 방법 및 실행 방법 등 사용 방법에 대해 기술한다.
+  
+  #### 1. emsdk 설치
+  * 아래 사이트 참고
+  [Developer’s Guide - WebAssembly](https://webassembly.org/getting-started/developers-guide/)
+  
+  #### 2. emsdk path 설정
+  : cmd 창 열때마다 해줘야함! 
+  
+     
+      $ source /mnt/c/git/emsdk/emsdk_env.sh -build-Release
+  
+  #### 3. c/c++ 소스 빌드
+  : 작성한 c/c++ 코드를 wasm, js 변환하고, html 파일도 만들어줌!
+  
+      $ emcc hello.c -s WASM=1 -o hello.html
+      $ em++ ImsApiTester_simple.cpp -s WASM=1 -s VERBOSE=1 -L../../Build/ -lnsImsServiceApi -o ims.html
+  
+  #### 4. browser 실행
+  - 일단 아래 코드 실행
+  : 브라우저에서 localhost:8080 으로 들어가면, 아래 명령을 실행시킨 위치 파일들에 접근 가능. 
+  
+  
+      $ emrun --no_browser --port 8080 .
+      
+      
+  - 브라우저에서 실행
+  
+  
+      http://localhost:8080/hello.html
+  
+'''
+tags: [
+  "사용법"
+]
+isStarred: false
+isTrashed: false

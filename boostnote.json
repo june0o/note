@@ -49,6 +49,11 @@
       "key": "dcb9e4ff3b96fbadcec9",
       "color": "#2BA5F7",
       "name": "JavaScript"
+    },
+    {
+      "key": "6c4c627ad430495f5a91",
+      "color": "#30D5C8",
+      "name": "WebAssembly"
     }
   ],
   "version": "1.0"

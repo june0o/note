@@ -1,0 +1,69 @@
+createdAt: "2018-09-13T05:36:11.016Z"
+updatedAt: "2018-09-13T06:07:59.743Z"
+type: "MARKDOWN_NOTE"
+folder: "6c4c627ad430495f5a91"
+title: "Hello Electron :rabbit:"
+content: '''
+  ### Hello Electron :rabbit:
+  : Electron 을 설치하고 Hello 앱을 만들어 본다.
+  
+  * 아래 사이트 참조
+  [Electron 애플리케이션 만들기](https://blog.outsider.ne.kr/1169)
+  
+  #### 1. Electron 설치
+  
+  
+      $ sudo npm install -g electron-prebuilt
+      
+  > 추가 설치 1
+  
+  : 일렉트론 실행시 아래와 같은 문구가 출력되면,
+  
+      $ electron src/
+      // 추가 설치2로 이동
+      /usr/local/lib/node_modules/electron-prebuilt/dist/electron: error while loading shared libraries: 
+      libgtk-x11-2.0.so.0: cannot open shared object file: No such file or directory
+      
+      // 추가 설치3로 이동
+      /usr/local/lib/node_modules/electron-prebuilt/dist/electron: error while loading shared libraries: 
+      libXss.so.1: cannot open shared object file: No such file or directory
+      
+      // 추가 설치4로 이동
+      /usr/local/lib/node_modules/electron-prebuilt/dist/electron: error while loading shared libraries: 
+      libgconf-2.so.4: cannot open shared object file: No such file or directory
+      
+  > 추가 설치 2
+  > 
+  : libgtk2.0-0:i386 를 install 시 아래와 같은 문구가 출력되면, 추가 설정후 재설치
+  
+      $ sudo apt install libgtk2.0-0:i386
+      Reading package lists... Done
+      Building dependency tree
+      Reading state information... Done
+      E: Unable to locate package libgtk2.0-0:i386
+      E: Couldn't find any package by glob 'libgtk2.0-0'
+      E: Couldn't find any package by regex 'libgtk2.0-0'
+  
+  > 추가 설정
+  > 
+  
+  i386 라이브러리 추가 명령
+  $ sudo dpkg --add-architecture i386
+  $ sudo apt-get update
+  
+  i386 라이브러리 제거 명령
+  $ sudo dpkg --remove-architecture i386
+  
+  > 추가 설치 3
+  
+  $ sudo apt-get install libxss1
+  
+  > 추가 설치 4
+  
+  $ sudo apt -y install libgconf2-4
+  
+  #### 2. 
+'''
+tags: []
+isStarred: false
+isTrashed: false
