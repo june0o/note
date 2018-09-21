@@ -1,0 +1,44 @@
+createdAt: "2018-09-20T08:31:44.814Z"
+updatedAt: "2018-09-21T00:54:29.826Z"
+type: "MARKDOWN_NOTE"
+folder: "6c4c627ad430495f5a91"
+title: "Node.js"
+content: '''
+  ### Node.js
+  #### 1. 개요
+  - 2009 년에 Ryan Dahl이 만든 프로그래밍 프레임워크
+  - 자바스크립트를 사용해 이벤트 기반의 서버 프로그램 작성 가능
+  - 구글 크롬에 사용된 V8이라는 자바스크립트 엔진과 libuv를 합친 프레임워크
+  - libuv는 비동기 형태로 운영체제의 기능에 접근할 수 있게 해주는 라이브러리
+  
+  #### 2. 이벤트
+      
+      const greeter = new events.EventEmitter();
+      greeter.on('welcome', function(){
+        console.log('hello');
+      });
+      
+      greeter.emit('welcome');
+  
+  #### 3. 모듈
+  : 코드를 작고 이해하기 쉽게 분할할 수 잇고, 코드 재사용이 쉽다.
+  작고 이해하기 쉬운 파일들을 하나하나 조립해서 애플리케이션을 만들어 나간다.
+  [Nodejs api](https://nodejs.org/api) 참고
+  
+      // discount.js
+      function applyDiscount (code, amount) {
+        ...
+      }
+      
+      module.exports = {
+        applyDiscount
+      };
+      
+      // test.js 에서 discount 모듈 사용
+      const discount = require('./discount');
+      discount.applyDiscount(502, 10);
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false

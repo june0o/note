@@ -1,0 +1,46 @@
+createdAt: "2018-09-21T00:54:20.558Z"
+updatedAt: "2018-09-21T01:51:35.339Z"
+type: "MARKDOWN_NOTE"
+folder: "6c4c627ad430495f5a91"
+title: "Electron"
+content: '''
+  ### Electron 
+  - 프런트엔드와 백엔드 자바스크립트 콘텍스트가 분리되어 있다.
+  - ipcMain모듈과 ipcRenderer모듈을 활용해서 프런트엔드와 백엔드 프로세스가 데이터를 교환
+  
+  #### 1. 내부 구조
+  - Chromium 소스 코드 + Atom(App/Browser/Renderer/Common)
+  - Chromium의 소스 코드(Atom쉘이 Node.js와 결합하게하는 코드)와 애플리케이션을 지원하는 요소들을 확실하게 구분
+  
+  ##### 1. libchromiumcontent
+  libchromiumcontent이라는 이름의 공유 라이브러리를 사용해 Blink와 V8등의 Chromium이 가지고 있는 콘텐츠들을 읽어 들입니다.
+  이러한 Chromium의 콘텐츠 모듈은 페이지 렌더링을 담당하고, 일렉트론 구성 요소들과 Chromium의 콘텐츠 모듈들이 상호작용할 수 있게하는 API들 제공
+  
+  ##### 2. 일렉트론의 구성 요소
+  > App
+  > 
+  Node.js를 읽어 들이는 기능, Chromium의 콘텐츠 모듈을 읽어들이는 기능, libuv에 접근하는 기능 등을 포함한 코드들이 C++11과 Objective-C++로 작성되어 있다.
+  
+  > Browser
+  > 
+  
+  > Renderer
+  > 
+  
+  > Common
+  > 
+  
+  
+  Tip
+  1. Electron 책 예제 소스
+  [Code examples](https://github.com/paulbjensen/cross-platform-desktop-applications)
+  
+  마이크로소프트는 여러 운영체제에서 인터넷 익스플로러를 테스트할 수 있게, 운영체제 플랫폼의 VM 이미지를 제공 (http://dev.modern.ie/tools/vmx/mac/)
+  이를 활용하면 따로 윈도우를 구매하지 않아도 간단한 테스트를 할 수 있다.
+  -> 형태가 바뀐듯. 현재 이 페이지는 404
+'''
+tags: [
+  "Electron"
+]
+isStarred: false
+isTrashed: false

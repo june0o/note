@@ -1,0 +1,60 @@
+createdAt: "2018-09-17T04:43:28.802Z"
+updatedAt: "2018-09-19T00:17:50.663Z"
+type: "MARKDOWN_NOTE"
+folder: "6c4c627ad430495f5a91"
+title: "Javascript 에서 c/c++ 함수 호출하기 :lemon:"
+content: '''
+  ### Javascript 에서 c/c++ 함수 호출하기 :lemon:
+  : JavaScript에서 C 함수를 호출하고 싶은 경우, Emscripten ccall() 함수와 내보낸 함수 목록에 함수를 추가하는 EMSCRIPTEN_KEEPALIVE 선언하면 가능
+  - 참고 사이트: [Compiling a New C/C++ Module to WebAssembly - 웹어셈블리](https://developer.mozilla.org/ko/docs/WebAssembly/C_to_wasm)
+  
+  #### 1. 소스 작성
+  : hello world 를 출력하는 예제에 Javascript에서 호출 할 myFunction 을 추가
+  
+      #include <stdio.h>
+      #include <emscripten/emscripten.h>
+      
+      int main(int argc, char ** argv) {
+          printf("Hello World\\n");
+      }
+      
+      #ifdef __cplusplus
+      extern "C" {
+      #endif
+      
+      void EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {
+          printf("MyFunction Called\\n");
+      }
+      
+      #ifdef __cplusplus
+      }
+      #endif
+  
+  #### 2. 빌드
+  : EXTRA_EXPORTED_RUNTIME_METHODS 옵션을 추가하여 빌드
+  
+      emcc -o hello.html hello.c -O3 -s WASM=1 -s NO_EXIT_RUNTIME=1  -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall"]'
+  
+  #### 3. html 수정
+  : 함수를 호출할 버튼 추가
+  
+      <body>
+          <button id="bnt_test" onclick="test_onclick();">start</button>
+          <script type="text/javascript">
+  		    function test_onclick() {
+              var result = Module.ccall('myFunction', // name of C function 
+                           null, // return type
+                           null, // argument types
+                           null); // arguments
+  		    }
+          </script>
+          <script type="text/javascript" src="hello.js">
+      </body>
+  
+  #### 3. 실행
+  : html 파일을 실행하여 버튼 클릭시 console 에 "MyFunction Called" 가 출력되는 것 확인
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
