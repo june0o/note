@@ -54,6 +54,11 @@
       "key": "6c4c627ad430495f5a91",
       "color": "#30D5C8",
       "name": "WebAssembly"
+    },
+    {
+      "key": "ab773e855a690f040074",
+      "color": "#E10051",
+      "name": "node"
     }
   ],
   "version": "1.0"

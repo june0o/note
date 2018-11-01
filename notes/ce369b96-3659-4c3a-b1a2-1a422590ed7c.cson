@@ -1,0 +1,146 @@
+createdAt: "2018-10-08T01:24:15.482Z"
+updatedAt: "2018-10-08T10:11:24.593Z"
+type: "MARKDOWN_NOTE"
+folder: "ab773e855a690f040074"
+title: "nodejs :bamboo:"
+content: '''
+  ### nodejs :bamboo:
+  
+  #### 1. 파일
+  
+  ##### 1-1 파일 읽고 쓰기.
+   
+  | 메소드 이름 | 설명 |
+  |---|---|
+  | readFile(filename, [encoding], [callback]) | 비동기식 IO로 파일을 읽어 들입니다. |
+  | readFileSync(filename, [encoding])| 동기식 IO로 파일을 읽어 들입니다.|
+  | writeFile(filename, data, encoding='utf8', [callback])| 비동기식 IO로 파일을 씁니다.|
+  | writeFileSync(filename, data, encoding='utf8')| 동기식 IO로 파일을 씁니다.|
+  
+  ex) 비동기 읽기
+  
+      var fs = require('fs');
+  
+      fs.readFile('./README.md', 'utf8', function(err, data) {
+        console.log(data);
+      });
+  
+  ex) 비동기 쓰기
+  
+      var fs = require('fs');
+  
+      fs.writeFile('./output.txt', 'Hello node :D', function(err) {
+        if (err) {
+          console.log('Error: ' + err);
+        }
+        console.log('output.txt 파일에 데이터 쓰기 완료!');
+      })
+  
+  #### 2. 웹 서버 만들기
+  ##### 2-1 미들웨어 사용하기
+  
+  - static 미들웨어
+  : 특정 폴더의 파일들을 특정 패스로 접근할 수 있도록 만들어 준다.
+  
+  ex) public 폴더에 있는 모든 파일을 웹 서버의 루트 패스로 접근할 수 있도록 설정
+      
+      app.use(express.static(path.join(__dirname, 'public')));
+      
+      ExpressExample/public/index.html 경로에 파일이 있는 경우,
+      http://localhost:3000/index.html 로 접근 가능
+      
+  - body-parser 미들웨어
+  : POST 로 요청했을 때 요청 파라미터를 확인할 수 있도록 해준다.
+  
+  
+      app.use(bodyParser.urlencoded({extended: true}));
+      app.use(function(req, res, next) {
+  
+        var paramId = req.param('id');
+        var paramPassword = req.param('password');
+      });
+  
+  - 라우터 미들웨어
+  : app 객체의 속성으로 제공되며 사용자가 요청한 기능이 무엇인지 패스를 기준으로 구별해 주기 때문에 아주 편리.
+  라우터 미들웨어를 사용하면 다음과 같은 메소드가 app 객체에 추가된다.
+  
+  
+      app.get('/process/rememo', function (req, res) {
+          console.log('process/rememo 호출됨');
+          res.redirect('/public/memo.html');
+      });
+  
+      app.post('/process/memo', function (req, res) {
+          console.log('/process/memo 호출됨');
+  
+          var writter = req.param('writter');
+          var date = req.param('date');
+          var memo = req.param('memo');
+  
+          res.writeHead('200', {'Content-Type' : 'text/html;charset=utf8'});
+          res.write('<h1>메모가 저장되었습니다.</h1>');
+          res.write('<a href="/process/rememo">다시 작성</a>');
+          res.end();
+        });
+  
+  
+  | 메소드 이름 | 설명 |
+  |---|---|
+  | get(path, callback) | GET 방식으로 특정 패스 요청이 발생했을 때 사용할 콜백 함수를 지정 |
+  | post(path, callback) | POST 방식으로 특정 패스 요청이 발생했을 때 사용할 콜백 함수를 지정 |
+  | put(path, callback) | PUT 방식으로 특정 패스 요청이 발생했을 때 사용할 콜백 함수를 지정 |
+  | delete(path, callback) | DELETE 방식으로 특정 패스 요청이 발생했을 때 사용할 콜백 함수를 지정 |
+  | all(path, callback) | 모든 요청 방식을 처리하며, 특정 패스 요청이 발생했을 때 사용할 콜백 함수를 지정 |
+  
+  - 쿠키와 세션 관리하기
+  : 사용자가 로그인한 상태인지 아닌지 확인하고 싶을 때 사용.
+  쿠키: 클라이언트 웹 브라우저에 저장되는 정보.
+  세션: 웹 서버에 저장되는 정보
+  
+  #### 3. 데이터베이스 사용하기
+  ##### 3-1 몽고디비 시작하기
+  - 몽고디비란?
+  : NoSQL(비관계형 데이터베이스). 성능을 최우선. 실시간으로 처리해야 하는 경우나 대용량 트래픽을 감당해야 하는 메시징 시스템에 활용되고 있음
+   여러 데이터가 모인 하나의 단위 = 컬렉션(Collection)
+   데이터베이스 = 컬렉션의 집합
+  
+  - 프로그램 설치
+  1. 다운로드 & 설치
+   [사이트](http://mongodb.org)에서 [Community Server] 탭 안의 Download 버튼 클릭하여 다운로드 후 설치
+  2. Path 추가
+  C:\\Program Files\\MongoDB\\Server\\3.0\\bin
+  3. 데이터 베이스 시작
+  user 폴더 아래 shopping\\database 폴더를 만들고,
+      
+      
+      $ mongodb --dbpath /Users/user/shopping/database
+  
+  - 데이터 추가 & 조회
+  
+  
+      // 몽고디비 데이터베이스에 연결할 수 있는 쉘로 이동
+      $ mongodb
+      
+      // 데이터베이스 지정
+      $ use shopping
+      
+      // 추가
+      $ db.users.insert({"name":"apple", "age":13})
+      
+      // users 컬렉션에 있는 모든 문서 조회
+      $ db.users.find().pretty()
+      
+      // 삭제. name속성에 app이 들어간 모든 데이터를 찾아 삭제
+      $ db.users.remove({"name":/app/})
+  
+  ##### 3-2 익스프레스에서 몽고디비 사용하기
+  - mongodb 모듈 설치
+  
+  
+      npm install mongodb --save
+      
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
