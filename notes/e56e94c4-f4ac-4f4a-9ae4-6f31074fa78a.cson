@@ -1,0 +1,41 @@
+createdAt: "2018-11-01T01:28:35.454Z"
+updatedAt: "2018-11-01T04:47:25.777Z"
+type: "MARKDOWN_NOTE"
+folder: "9bf813ab2cc5d88fa6c1"
+title: "SIP message :mountain_bicyclist:"
+content: '''
+  ### SIP message :mountain_bicyclist:
+  
+  : Presence 정보(회의중, 통화중, 자리 비움 등)를 서로 주고 받기 위해 REGISTER, PUBLISH, SUBSCRIBE, NOTIFY 가 유기적으로 동작
+  
+  - SUBSCRIBE (RFC3265)
+  특정 이벤트를 살펴보기 위해 원격노드에 요청하기 위한 메소드
+  
+  - NOTIFY (RFC3265)
+  특정 이벤트 발생 시 응답하기 위한 메소드
+  
+  - PUBLISH (RFC 3903, RFC3856)
+  Presence Server에 UA의 상태정보를 전송하기 위한 메소드
+  
+  > Regi 메시지와 SUBSCRIBE, NOTIFY 를 같이 사용하는 케이스
+  > 
+  1. 단말은 Regi 성공시, Regi event package 에 대한 SUBSCRIBE 메시지를 전송해야 한다.
+  2. 단말은 SUBSCRIBE 메시지와 동일한 Call-ID를 갖는 NOTIFY 메시지를 통해서 Regi event package를 전달받는다.
+  
+  예) KT UMC 
+  | State | Event | 단말 동작 |
+  |---|---|---|
+  | Active| shortened | Notify 에 전달되는 expires값의 0.7 시간에 Regi 수행 |
+  | Terminated| expired| Initial Regi 수행, 단 통화중일 경우 통화 완료 후 수행|
+  | Terminated|deactivate| Initial Regi 수행, 단 통화중일 경우 통화 완료 후 수행|
+  |Terminated|probation|retry-after 시간 후 Initial Regi 수행|
+  |Terminated|rejected|바로 Regi 하지 않고 단말 재부팅 이후 수행|
+  
+  - PUBLISH
+  AoR (Address of Record) 과 연관된 Event State를 생성, 변경, 제거하기 위한 메소드
+  REGISTER 와 비슷하지만, REGISTER와 달리 다이얼로그를 생성하지 않는다. 따라서 상태 변화에 즉각적인 퍼블리싱이 가능하며, 기존의 다이얼로그에 영향을 미치지 않는다. 
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false

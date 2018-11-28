@@ -1,0 +1,47 @@
+createdAt: "2018-11-02T01:19:32.886Z"
+updatedAt: "2018-11-02T06:08:00.536Z"
+type: "MARKDOWN_NOTE"
+folder: "9bf813ab2cc5d88fa6c1"
+title: "MBCP"
+content: '''
+  ## MBCP 
+  
+  :star: 네이블 자체 세미나 자료\\재난망 PTT 개발 세미나\\5. PoC\\
+  OMA-TS-PoC_System_Description-V2_1_v.0.3.ppt
+  - Talk Burst Control 은 PoC Speech만 포함하는 Media-floor Control Entity를 위해 사용.
+  - Media Burst Control 은 Talk Burst Control 에 멀티미디어를 포함한 Media-floor Control Entity를 지원하는 Talk Burst Control 확장 버전
+  - PoC service의 half duplex 유형 미디어는 PoC Client가 PoC Client에게 Media Burst 를 보내기 전에 발신 권한 협상을 해야 한다.
+  - Media Burst Control은 PoC Speech, Audio와 Video 발신 권한 협상을 위해 사용
+  - Media Burst Control은 Discrete Media와 Media Streaming Control 에도 사용할 수 있다.
+  - PoC Client 는 다음 request/response/indication 을 지원해야 한다.
+    - Media Burst request
+    - Media Burst Confirm response
+    - Media Burst Reject response
+    - Media Burst Completed indication
+    - No Media Burst Indication
+    - Receiving Media Burst Indication
+    - Stop Media Burst indicatioin
+    - Connect indication
+    - Disconnect indication
+    - Media Burst Acknowledgement
+  - PoC Server와 PoC Client가 Media Burst request queing을 지원하면 다음 request/response/indication이 지원되야 한다.
+    - Media Burst request queue position status indication
+  - PoC Server와 Poc Client가 Still-alive를 지원하면 PoC Server/Client는 다음 request/response/indication을 지원해야 한다.
+    - Still-alive request
+    - Stil-alive response
+  - PoC Server와 PoC Client가 fast PoC Session 수립을 지원하면 다음 indication이 지원되야 한다.
+    - setup indication
+  
+  - Media-floor Control procedure
+    - PoC Session은 하나 이상의 Media Stream으로 이루어질 수 있다.
+    - 하나 이상의 동일 미디어 타입의 Media Stream이 있을 수도 있다.
+    - Media-floor control 을 사용하는 이런 Media Stream을 위해 각 Media Stream이나 다수의 Media Stream은 분리된 Media-floor Control Entity로 제어 되어야 한다.
+    - Binding between Media Types and Media-floor Control Entities
+      - PoC Session은 Audio, PoC Speech, Discrete Media와 Media Streaming Control처럼 여러 Media Type인 다수의 Media Stream으로 구성될 수 있다.
+      - 각 Media Stream은 각각 혹은 여러 유형의 Media Stream이 동시에 Media-floor Control Entity에 binding 될 수 있다.
+      - 이런 Media-floor Control Entity를 binding은 PoC Session 수립 시 협의 된다.
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false

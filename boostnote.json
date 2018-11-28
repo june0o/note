@@ -59,6 +59,11 @@
       "key": "ab773e855a690f040074",
       "color": "#E10051",
       "name": "node"
+    },
+    {
+      "key": "9bf813ab2cc5d88fa6c1",
+      "color": "#30D5C8",
+      "name": "SIP"
     }
   ],
   "version": "1.0"
