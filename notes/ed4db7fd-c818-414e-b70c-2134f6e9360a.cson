@@ -1,0 +1,19 @@
+createdAt: "2018-11-28T08:55:31.973Z"
+updatedAt: "2018-11-28T08:58:24.421Z"
+type: "MARKDOWN_NOTE"
+folder: "6584094acd502b432b2c"
+title: "기업의 가치"
+content: '''
+  기업의 가치
+  
+  저평가도 (안전마진) = 1주 가치 vs 주가
+  
+  1주 가치 = 주주가치/발행 주식 수
+  주주가치 = 사업가치 + 재산가치 - 부채
+  사업가치 = 3년 영업이익 평균 * 10
+  재산가치 = (유동자산 - 유동부채 * 1.2) + 투자 등의 자산
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false

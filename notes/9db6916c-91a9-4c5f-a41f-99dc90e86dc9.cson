@@ -1,5 +1,5 @@
 createdAt: "2018-11-02T05:49:25.372Z"
-updatedAt: "2018-11-07T08:47:10.217Z"
+updatedAt: "2018-11-30T07:09:00.800Z"
 type: "MARKDOWN_NOTE"
 folder: "9bf813ab2cc5d88fa6c1"
 title: "MBCP (Media Plane Control Protocol)"
@@ -146,11 +146,53 @@ content: '''
   
   사전 arrange된 그룹통화, 채팅 그룹통화 또는 Priviate통화에 사전 설정된 세션을 사용할 수 있다. 유사하게 미리 설정된 세션은 사전 arrange된 그룹통화, 채팅 그룹통화 그리고 Private 통화 종료 후에도 재사용을 위해 해제(release)될 수 있다.
   
-  사전 설정된 세션을 통한 호 설정과 관련된 media plane control 메시지는 media plane control 에 사용되는 채널을 통해 전송된다. 사전 설정된 세션의 종료 없이, 사전 설정된 세션을 통해 호 해제와 관련된 media plane control 메시지들은 media plane control 에 사용되는 채널을 통해 전송된다. 유니 캐스트 채널
+  사전 설정된 세션을 통한 호 설정과 관련된 media plane control 메시지는 media plane control 에 사용되는 채널을 통해 전송된다. 사전 설정된 세션의 종료 없이, 사전 설정된 세션을 통해 호 해제와 관련된 media plane control 메시지들은 media plane control 에 사용되는 채널을 통해 전송된다. media plane control를 위한 유니 캐스트 채널은 MCPTT-4 기준점보다 높다.
   
+  ###### 4.1.2.2 Call setup over pre-established session
+  사전에 arrange된 그룹 콜의 경우, 발신자가 3GPP TS 24.379[2] 에 지정된 SIP 메시지를 사용하여 pre-establish 세션의 사용을 나타내는 호 설정을 시작하면, 참여 MCPTT 기능(발신 MCPTT 클라이언트를 서비스 함)은 제어 MCPTT 기능이 이 호출의 시작을 수락한 후에 발신 MCPTT 클라이언트에게 Connect 메시지를 전송한다. 이 Connect 메시지를 수신한 후, 발신 MCPTT 클라이언트는 연결이 수락되었다는 것을 표시하거나 연결이 수락되지 않음을 표시하는 Ack 메시지를 보낸다. 발신 MCPTT 클라이언트가 연결을 수락하면 이 통화의 Floor 컨트롤은 6절에서 계속된다.
   
+  사전에 arranged된 그룹 콜의 경우, 발신 그룹 멤버에 의해 트리거된 제어 MCPTT 기능이 3GPP TS 24.379[2] 에 명시된대로 콜을 시작하면, terminating(착신) MCPTT 클라이언트를 serve 하는 참여 MCPTT 기능은 이 그룹에 소속된 모든 MCPTT 클라이언트에게 Connect 메시지를 보낸다. 연결 메시지를 수신한 후 terminating(착신) MCPTT 클라이언트는 연결을 수락함을 표시하는 혹은 연결을 수락하지 않음을 표시하는 Ack 메시지를 보낸다. 연결이 terminating(착신) MCPTT 클라이언트에 의해 수락되면, 이 콜에대한 floor 컨트롤은 6절에서 계속된다.
   
+  Note: terminating(착신) 클라이언트가 사전 설정된 세션을 갖을 수 없는 경우, 3GPP TS 24.379[2]에 명시된 바와 같이 온 디맨드 호설정에서처럼 호 설정이 진행된다.
   
+  채팅 그룹 콜의 경우, 3GPP TS 24.379[2]에서 지정된 SIP 메시지를 사용하여 채팅 그룹에 참여할 때 그룹 멤버는 미리 설정된 세션을 사용할 수 있다. 이미 채팅 그룹콜에 참여한 그룹 멤버의 경우 MCPTT 클라이언트(Floor 참여자)와 MCPTT 서버간의 Floor 컨트롤은 6장에서 계속된다.
+  
+  Private 콜의 경우, 발신자에 대한 절차는 발신자가 사전에 설정된 세션에 미리 arrange된 콜 설정을위한 콜을 시작하는 것과 동일하지만, 콜 수신자가 개인 사용자이고 사전에 arrange된 그룹이 아닌 차이가 있다.
+  
+  Private 콜의 경우, 발신자에 의해 트리거된 제어 MCPTT 기능이 3GPP TS 24.379[2]에 명시된 콜을 시작하면, 참여 MCPTT 기능(착신 MCPTT 클라이언트를 지원)은 착신 MCPTT 클라이언트에게 Connect 메시지를 보낸다. MCPTT 클라이언트는 미리 설정된 세션을 사용할 수 있고 시작 모드가 자동인 경우 참여 MCPTT 기능. 시작 모드가 수동인 경우, 착신 MCPTT 클라이언트는 3GPP TS 24.379[2]에 규정된 SIP 절차를 사용하여 초대된다.
+  
+  ###### 4.1.2.3 Release of a call which uses a pre-established session
+  제어 MCPTT 기능(3GPP TS 24.379[2]에 기술된)에 의해 콜이 해제되면 참여 MCPTT 기능은 이 콜에 대해 사전 설정된 세션을 사용하는 모든 MCPTT 클라이언트에게 Disconnect 메시지를 보낸다. 그런 다음 콜은 해제되고 (3GPP TS 24.379[2] 참조) 미리 설정된 세션은 다른 콜에 사용될 수 있다.
+  
+  MCPTT 클라이언트가 사전 설정된 세션을 해제하지 않고 사전 설정된 세션을 통해 설정한 콜(3GPP TS 24.379[2] 에 기술된)을 떠날 때, 이 사전 설정된 세션을 다른 콜에 사용할 수 있다.
+  
+  사전 설정된 세션을 통한 콜 설정은 3GPP TS 24.379[2] (Disconnect 메시지를 사용 없이)의 사양을 사용하여 릴리즈 될 수 있으므로,이 콜에 사용되어진 것 역시 릴리즈된다.
+  
+  ##### 4.1.3 MBMS subchannel control
+  ###### 4.1.3.1 General
+  참여 MCPTT 기능은 미디어 및 미디어 제어 plane의 DL전송을 위해 MBMS 베어러를 사용할 수 있다.
+  
+  참여 MCPTT 기능은 MBMS 베어러 활성화를 결정한다. 3GPP TS 29.468 [6]에 기술된 MBMS 베어러의 활성화 후에 이 MBMS 베어러의 TMGI 는 이 MBMS 베어러의 MBMS 서비스 영역 내의 MCPTT 클라이언트에게 알린다. 이 알림은 MCPTT 클라이언트가 이 MBMS 베어러를 청취(디코딩/복조)할 수 있게 한다. MBMS 베어러의 활성화 및 TMGI 알림(발표)는 그룹 또른 다른 목적과 관련 없이 MBMS 서브채널 자원의 풀을 생성한다.
+  
+  참여하는 MCPTT 기능이 MBMS 베어러를 활성화하고 사용하기로 결정하는 기준은 구현에 따라 다르다.
+  
+  MBMS 베어러는 하나 이상의 그룹에 대한 DL 전송을 위해 사용될 수 있다. 이를 위해, 목적지 UDP port와 같은 추가 파라미터는 수신 MCPTT 클라이언트가 동일한 MBMS 베어러를 통해 서로 다른 그룹에 속하는 메시지 및 패킷을 구분할 수 있게 한다.
+  
+  TMGI가 발표될 때, 범용 MBMS 서브채널
+  
+  ###### 4.1.3.2 Start of a conversation
+  ###### 4.1.3.3 During a conversation
+  ###### 4.1.3.4 Ending the conversation
+  
+  #### 4.2 Internal structure of media plane control entities
+  ##### 4.2.1 Controlling MCPTT function
+  - Application and signaling plane,
+  - Floor control server - Floor control interface towards the MCPTT client / Floor request queue / Floor control arbitration logic
+  - Media distribution function - Network media interface / Media distributor
+  
+  ##### 4.2.2 MCPTT client
+  - Application and signaling plane
+  - Floor participant / Media mixer / MBMS insterface
   
   
   

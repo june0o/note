@@ -53,7 +53,7 @@
     {
       "key": "6c4c627ad430495f5a91",
       "color": "#30D5C8",
-      "name": "WebAssembly"
+      "name": "Web"
     },
     {
       "key": "ab773e855a690f040074",
@@ -64,6 +64,11 @@
       "key": "9bf813ab2cc5d88fa6c1",
       "color": "#30D5C8",
       "name": "SIP"
+    },
+    {
+      "key": "6584094acd502b432b2c",
+      "color": "#3FD941",
+      "name": "economy"
     }
   ],
   "version": "1.0"

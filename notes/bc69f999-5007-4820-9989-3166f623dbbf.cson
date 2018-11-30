@@ -1,0 +1,32 @@
+createdAt: "2018-11-28T06:24:18.435Z"
+updatedAt: "2018-11-29T04:25:47.712Z"
+type: "MARKDOWN_NOTE"
+folder: "6c4c627ad430495f5a91"
+title: "Sip Stack for WEB 4 :tophat:"
+content: '''
+  ## Sip Stack for WEB #4 :tophat:
+  : Js + dll + Electron 방법
+  - Restful api 를 통해 백그라운드 어플이 요청을 받아 처리
+  - c 라이브러리(dll) 는 node ffi 로 인터페이스를 만들어 node(js) 에서 호출 가능
+  - native socket 을 사용할 수 있고, 검증된 방법
+  - 백그라운드 어플은 Electron 으로 Tray 어플을 작성. 개발, 설치 및 배포 편의를 도모
+  
+  Todo:
+  1. sip stack Dll 로 감싸 DLL Library 만들기
+  2. node ffi 인터페이스 만들기
+  3. Electron Tray 어플 만들기
+  4. 앱 설치시 Registry 에 등록 후 호출 되는 것 확인
+  
+  대충 만들어 본 것. 아래 위치에 있다.
+  sip DLL Library - C:\\dev\\windows\\SipDllWrapper
+  node ffi -  C:\\dev\\ffi\\sip
+  web - C:\\dev\\web\\sip 
+  1. node webserver.js 실행
+  2. web 에서 127.0.0.1:3000 접근. 
+  3. start 입력 시 레지 되는 것 확인.
+  4. stop 입력 시 디레지 되는 것 확인.
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false
