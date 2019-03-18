@@ -1,0 +1,25 @@
+createdAt: "2018-12-21T04:24:33.978Z"
+updatedAt: "2019-01-08T04:14:32.327Z"
+type: "MARKDOWN_NOTE"
+folder: "6c4c627ad430495f5a91"
+title: "electron 실행 파일 만들기"
+tags: []
+content: '''
+  ## electron 실행 파일 만들기
+  
+  패키지 도구 asar 설치
+  - 윈도우에서 파일 경로 256글자 제한이 발생하지 않게 파일의 경로를 짧게 만들어줌
+  - require 함수의 속도를 빠르게 해줌
+  - 소스 코드가 외부에 노출되지 않게 감춰줌
+  
+  `npm install -g asar`
+  
+  앱관련 소스가 있는 상위 폴더에서 소스코드를 asar 아카이브로 변환
+  asar pack tray-app-electron app.asar
+  
+  운영체제와 CPU 아키텍처에 맞는 일렉트론 바이너리 파일 내려받기
+  [Releases · electron/electron · GitHub](https://github.com/electron/electron/releases)
+  
+'''
+isStarred: false
+isTrashed: true

@@ -1,0 +1,51 @@
+createdAt: "2019-03-10T02:05:44.992Z"
+updatedAt: "2019-03-10T04:12:35.464Z"
+type: "MARKDOWN_NOTE"
+folder: "c4debb4c6289b9260e1d"
+title: "P2P 솔루션"
+tags: []
+content: '''
+  ## P2P 솔루션
+  
+  NAT(Network Address Translator) Traversal(횡단) 솔루션
+  - ALG (Application Layer Gateway)
+  - STUN (Session Traversal Utiliies for NAT, RFC 3489, 5389)
+  - SBC (Session Border Controller)
+  - ICE (Interactive Connectivity Establishment, RFC 5245)
+  
+  ### STUN (Session Traversal Utiliies for NAT, RFC 3489, 5389)
+  : NAT 장비 뒤에 위치한 클라이언트가 STUN 서버에게 자신의 공인 IP주소를 알려달라고 요청.
+  동작할 수 없는 경우
+  1. 두 클라이언트가 모두 다른 NAT 환경이 있을 때
+  2. NAT 장비가 Symmetric NAT 인 경우. 
+  Symmetric NAT는 클라이언트가 서로 다른 목적지로 패킷을 전송할 경우 NAT 매핑 테이블이 매번 변경 되므로
+  
+  ### TURN (Traversal Using Relays around NAT, RFC 5766)
+  : NAT 상황에 높인 호스트가 릴레이 서버를 통해 상호 통신하도록 하며, ICE의 일부로 사용될 수 있도록 디자인
+  NAT 장비 뒤에 위치한 클라이언트가 TURN 서버에게 Relay 서버의 Relay Transport address 를 할당해 달라고 요청.
+  
+  간단히 정리하면,
+  STUN 은 단말이 자신의 공인 IP주소와 포트를 확인하는 과정을 명시한 프로토콜이고,
+  TURN 은 단말이 패킷 릴레이를 위한 주소를 할당받기 위한 과정을 명시한 프로토콜.
+  STUN 서버는 주소 바인딩을 하고, TURN 서버는 릴레이 주소를 할당합니다.
+  
+  ### ICE (Interactive Connectivity Establishment, RFC 5245)
+  : 두 대의 단말이 서로 상대방과 통신하기 위한 최적의 경로를 찾을 수 있도록 도와주는 프레임워크
+  STUN 과 TURN 을 활용하여 Offer/Answer Model 프로토콜에 적용할 수 있다.
+  
+  1. Candidate Gathering
+  : Local Address, Server Reflexive Address, Relayed Address
+  
+  2. Candidate Exchange
+  
+  3. Connectivity Check
+  : 이용 가능한 Candidate 확인. 4-way Handshake
+  
+  * 참고 사이트
+  [NExpert :: NAT Traversal의 종결자, ICE](https://www.nexpert.net/424)
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

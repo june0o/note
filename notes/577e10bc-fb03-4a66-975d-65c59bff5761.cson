@@ -1,0 +1,57 @@
+createdAt: "2019-01-08T10:03:54.435Z"
+updatedAt: "2019-01-09T01:09:36.165Z"
+type: "MARKDOWN_NOTE"
+folder: "6c4c627ad430495f5a91"
+title: "Custom URI sheme"
+tags: []
+content: '''
+  # Custom URI sheme
+  
+  ## 1. 등록
+  : 인스톨러 수행 시 Custom URI sheme 을 레지스트리 등록하도록 추가.
+  
+      // package.json
+      "build": {
+          "productName": "voipapp",
+          ...
+          "nsis": {
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": true,
+            "include": "build/installer.nsh" //<- 스크립트 추가
+          },
+          "directories": {
+            "buildResources": "resources/installer/",
+            "output": "dist/",
+            "app": "."
+          }
+      }    
+  
+      // installer.nsh Custom URI sheme 레지스트리 등록 스크립트
+      !macro customInstall 
+          DetailPrint "Register voipapp URI Handler" 
+          DeleteRegKey HKCR "voipapp" 
+          WriteRegStr HKCR "voipapp" "" "URL:voipapp" 
+          WriteRegStr HKCR "voipapp" "URL Protocol" "" 
+          WriteRegStr HKCR "voipapp\\DefaultIcon" "" "$INSTDIR\\${APP_EXECUTABLE_FILENAME}" 
+          WriteRegStr HKCR "voipapp\\shell" "" "" 
+          WriteRegStr HKCR "voipapp\\shell\\Open" "" "" 
+          WriteRegStr HKCR "voipapp\\shell\\Open\\command" "" "$INSTDIR\\${APP_EXECUTABLE_FILENAME} %1" 
+      !macroend
+  
+  ## 2. 실행
+  ### 1 자동 실행
+  [Location replace() Method](https://www.w3schools.com/jsref/met_loc_replace.asp)
+  
+      <script language="JavaScript">
+        window.location.replace("voipapp:");
+      </script>
+  
+  ### 2 수동 실행
+  : 클릭 시 실행됨
+  
+      <a href="voipapp:">클릭</a>
+  
+  
+'''
+isStarred: false
+isTrashed: false

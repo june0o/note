@@ -1,0 +1,35 @@
+createdAt: "2018-12-12T09:01:26.705Z"
+updatedAt: "2018-12-12T09:10:46.287Z"
+type: "MARKDOWN_NOTE"
+folder: "6c4c627ad430495f5a91"
+title: "Go"
+content: '''
+  ## Go
+  
+  ### 1. Go 다운로드
+  [Downloads - The Go Programming Language](https://golang.org/dl/)
+  플랫폼에 맞는 Go 다운로드
+  
+  ### 2. github.com 에서 라이브러리 다운로드 import
+  
+      // github 위치를 직접 지정하거나
+      $ go get github.com/xxx
+      
+      // go 파일이 있는 위치에서 go get 하면 알아서 필요한 소스 받아옴.
+      $ go get 
+      
+  ### 3. 실행
+  : 실행 파일 안 만들고 바로 실행.
+  
+      $ go run hello.go
+  
+  ### 4. 실행파일 만들기
+  : 플랫폼별로 실행파일 만드는 옵션도 있음.
+  
+      $ go build hello.go
+  
+  
+'''
+tags: []
+isStarred: false
+isTrashed: false

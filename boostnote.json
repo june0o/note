@@ -69,6 +69,16 @@
       "key": "6584094acd502b432b2c",
       "color": "#3FD941",
       "name": "economy"
+    },
+    {
+      "key": "f4475e98ee6d98fde24a",
+      "color": "#2BA5F7",
+      "name": "CSS"
+    },
+    {
+      "key": "c4debb4c6289b9260e1d",
+      "color": "#30D5C8",
+      "name": "move"
     }
   ],
   "version": "1.0"

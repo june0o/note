@@ -1,5 +1,5 @@
 createdAt: "2018-09-06T06:47:11.331Z"
-updatedAt: "2018-09-06T08:50:57.524Z"
+updatedAt: "2019-01-09T12:04:24.146Z"
 type: "MARKDOWN_NOTE"
 folder: "dcb9e4ff3b96fbadcec9"
 title: "기본 문법 :baseball:"
@@ -75,7 +75,16 @@ content: '''
       for(key in grades) {
           document.write("key : "+key+" value : "+grades[key]+"<br />");
       }
-      
+  
+  - 반복문
+  
+  for (var 프로퍼티가 담긴 변수명 in 객체명) {}
+  
+  var jsbook = {title: '자바스크립트 입문', price: 25000, stock: 3};
+  for (var p in jsbook) {
+      console.log(p + ':' +jsbook[p]);
+  }
+  
 '''
 tags: []
 isStarred: false

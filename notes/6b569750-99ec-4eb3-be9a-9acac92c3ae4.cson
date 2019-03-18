@@ -1,0 +1,26 @@
+createdAt: "2019-01-07T10:26:14.299Z"
+updatedAt: "2019-01-08T04:11:48.996Z"
+type: "MARKDOWN_NOTE"
+folder: "dcb9e4ff3b96fbadcec9"
+title: "Javascript"
+tags: []
+content: '''
+  ## Javascript
+  
+  > Javascript의 기본적이면서 가장 중요한 역할
+  - 브라우저에 표시된 HTML이나 CSS를 변경한다.
+  - 브라우저에 표시된 HTML이나 CSS에서 원하는 정보를 읽는다.
+  
+  HTML 태그 서식과 명칭
+  <태그명 속성="속성값">요소내용(콘텐츠)</태그>
+  
+  자바스크립트 프로그램을 작성하거나 코드를 이해하기 위해서 객체가 무엇인지 이해하는 것이 매우 중요하다.
+  객체에는 window객체, console객체, document객체 등이 있으며 각각 고유의
+  - 메소드(객체에 xx해라, 하고 지시한다)
+  - 프로퍼티(객체의 상태를 나타낸다)
+  
+  를 갖는다.
+  
+'''
+isStarred: false
+isTrashed: false

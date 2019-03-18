@@ -1,0 +1,43 @@
+createdAt: "2018-12-21T01:09:07.864Z"
+updatedAt: "2018-12-21T01:41:11.735Z"
+type: "MARKDOWN_NOTE"
+folder: "6c4c627ad430495f5a91"
+title: "2018/12/21 작업중.."
+tags: []
+content: '''
+  ## 2018/12/21 작업중..
+  
+  1. electron app
+  C:\\dev\\electron\\sipTrayApp
+  
+  - electron background app
+  |파일|내용|
+  |--|--|
+  |main.js|tray app 관련 코드|
+  |app_index.html|tray app 이라 별 내용은 없고, apiserver.js 만 호출|
+  
+  - PttShell
+  |파일|내용|
+  |--|--|
+  |apiserver.js|8081 포트로 socket.io 로 api 처리|
+  |sip_sdk\\sip.js|web api 와 dll api 연동|
+  |sip_sdk\\SipDllWrapper.dll|sip library|
+  
+  - webserver (http://127.0.0.1:3000 test 웹 서버)
+  : 이 두 파일은 다른 곳으로 옮겨도 무방할 듯 하나, 일단 둔다.
+  |파일|내용|
+  |--|--|
+  |webserver.js|localhost:3000 접속 요청시 index.html 파일 전송|
+  |index.html|채팅 UI. start/stop/call 요청시 socket.io 8081 포트로 메시지 전송|
+  
+  2. sip
+  - dll wrapper
+  C:\\dev\\windows\\SipDllWrapper
+  
+  - sip library
+  : ims4iris 사용
+  E:\\git\\ims4iris\\src\\1_Solution\\AllLink_Ims
+  
+'''
+isStarred: false
+isTrashed: false

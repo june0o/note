@@ -1,0 +1,31 @@
+createdAt: "2018-12-20T08:20:41.859Z"
+updatedAt: "2018-12-20T08:36:20.972Z"
+type: "MARKDOWN_NOTE"
+folder: "6c4c627ad430495f5a91"
+title: "WebApi 고려 사항 :lemon:"
+tags: []
+content: '''
+  ## WebApi 고려 사항 :lemon:
+  
+  ### 1. WebApi
+  1) WebApi.js
+  : 배포되는 js api.
+  사용 편의성 등 고려. study
+  2) apiclient.js
+  : Background App과 api 요청/응답 처리하는 부분
+  요청/응답 message protocol 정의 필요.
+  3) background app 호출
+  
+  ### 2. Background App
+  1) apiserver.js
+  : Web api 요청 수신/응답 처리하는 부분.
+  요청/응답 message protocol 정의 필요.
+  
+  http restful api 사용시 client가 이벤트가 있는지 주기적으로 polling 해야 하는 문제가 있어 송수신 모듈로는 socket.io 를 사용할 예정
+  [browser server 간 요청/응답 방법 정리](http://bcho.tistory.com/896)
+  
+  
+  
+'''
+isStarred: false
+isTrashed: false

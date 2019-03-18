@@ -1,44 +1,16 @@
-createdAt: "2018-09-20T08:31:44.814Z"
-updatedAt: "2019-01-08T04:51:40.881Z"
+createdAt: "2018-12-24T01:27:08.376Z"
+updatedAt: "2019-01-08T04:21:31.046Z"
 type: "MARKDOWN_NOTE"
 folder: "6c4c627ad430495f5a91"
-title: "Node.js"
+title: "5. Node.js 사용하기"
+tags: []
 content: '''
-  ### Node.js
-  #### 1. 개요
-  - 2009 년에 Ryan Dahl이 만든 프로그래밍 프레임워크
-  - 자바스크립트를 사용해 이벤트 기반의 서버 프로그램 작성 가능
-  - 구글 크롬에 사용된 V8이라는 자바스크립트 엔진과 libuv를 합친 프레임워크
-  - libuv는 비동기 형태로 운영체제의 기능에 접근할 수 있게 해주는 라이브러리
+  ## 5. Node.js 사용하기
   
-  #### 2. 이벤트
-      
-      const greeter = new events.EventEmitter();
-      greeter.on('welcome', function(){
-        console.log('hello');
-      });
-      
-      greeter.emit('welcome');
+  Node.js 는 2009년에 Ryan Dahl이 만든 프로그래밍 프레임워크.
+  V8 자바스크립트 엔진과 libuv(비동기 형태로 운영체제의 기능에 접근할 수 있게 해주는 라이브러리)를 합친 것.
   
-  #### 3. 모듈
-  : 코드를 작고 이해하기 쉽게 분할할 수 잇고, 코드 재사용이 쉽다.
-  작고 이해하기 쉬운 파일들을 하나하나 조립해서 애플리케이션을 만들어 나간다.
-  [Nodejs api](https://nodejs.org/api) 참고
-  
-      // discount.js
-      function applyDiscount (code, amount) {
-        ...
-      }
-      
-      module.exports = {
-        applyDiscount
-      };
-      
-      // test.js 에서 discount 모듈 사용
-      const discount = require('./discount');
-      discount.applyDiscount(502, 10);
-  
-  #### 4. 동기와 비동기
+  ### 1. 동기와 비동기
   
   예제1. Nodejs를 사용해 동기적으로 폴더 내부의 파일 수 구하기
   
@@ -53,7 +25,7 @@ content: '''
           console.log(files.length);    
       });
   
-  #### 5. 스트림
+  ### 2. 스트림
   스트림을 사용하면 많은 양의 데이터를 전송하고 처리할 때 메모리를 크게 절약할 수 있다. 
   텍스트 파일을 chunk 단위로 잘라서 하나하나 읽어 들인 뒤에, 데이터를 처리하는 것이 더 효율적.
   
@@ -70,7 +42,7 @@ content: '''
       // -> 결과
       // {rss: 36184064, heapTotal: 20658336, heapUsed: 16310280}
       
-  #### 6. 이벤트
+  ### 3. 이벤트
   
       const greeter = new events.EventEmitter();
       
@@ -80,7 +52,7 @@ content: '''
       
       greeter.emit('welcome');
   
-  #### 7. 모듈
+  ### 4. 모듈
   Nodejs는 재사용 가능한 코드들을 모듈이라는 기능으로 만들 수 있다.
   
       function applyDiscount (code, amount) {
@@ -101,6 +73,5 @@ content: '''
       
   
 '''
-tags: []
 isStarred: false
 isTrashed: true

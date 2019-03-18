@@ -1,0 +1,153 @@
+createdAt: "2018-12-24T01:26:24.699Z"
+updatedAt: "2019-01-08T10:02:15.642Z"
+type: "MARKDOWN_NOTE"
+folder: "6c4c627ad430495f5a91"
+title: "데스크톱 애플리케이션 배포하기 :pig:"
+tags: []
+content: '''
+  # 데스크톱 애플리케이션 배포하기 :pig:
+  
+  - 애플리케이션을 위한 아이콘을 만든다
+  - 다양한 운영체제에서 동작할 수 있게 바이너리를 생성
+  - 다양한 플랫폼에서 테스트
+  
+  ## 1. 애플리케이션 아이콘 만들기
+  1) macOS
+  ICNS 파일 형식을 사용
+  App Store - iConvert Icons / Icon Composer 이용
+  https://iconverticons.com/online/ 온라인 무료 버전
+  
+  2) 윈도우
+  ICO 파일 형식 사용
+  http://icoconverter.com 온라인 도구 사용
+  
+  3) 리눅스
+  freedesktop.org 에서 아이콘 관련 규격 통일. 데스크톱 엔트리 표준
+  .desktop 이라는 형식의 파일을 사용해서 어플이름, 어떤 프로그램을 실행해야 하는지, 어떤 아이콘을 사용하는지 등의 설정 정보 표현
+  
+  ## 2. 배포 패키지 만들기
+  ### 1. electron-packager 도구 사용하기
+  아래 사이트 참고함.
+  [Electron 데스크탑 앱 배포하기](https://jiwondh.github.io/2017/06/23/Electron2/)
+  
+  #### 1. 필요한 패키지 설치
+  - electron-packager 를 dev 버전으로 설치
+  `npm install electron-packager --save-dev`
+  - asar 를 dev 버전으로 설치
+  `npm install asar --save-dev`
+  
+  #### 2. 앱 패키징
+  ##### 2-1 Electron 기본 아이콘으로 앱 패키징
+  1. package.json 파일에 build 명령어 추가
+  
+  
+      ...
+      "scripts": {
+        "build": "electron-packager ."
+      }
+  
+  2. 빌드 수행
+  `npm run build`
+  
+  voipapp-win32-ia32 로 패키징 폴더가 생성되고 그 안에 voipapp.app 이 생성된다.
+  
+  ##### 2-2 사용자 지정 아이콘으로 앱 패키징
+  : todo
+  
+  ##### 2-3 asar 아카이브 포맷을 통한 코드 노출 방지
+  1. package.json 파일에 package 명령어 추가
+  
+  
+      ...
+      "scripts": {
+        "package": "asar pack voipapp-win32-ia32/voipapp.app/Contents/Resources/app voipapp-win32-ia32/voipapp.app/Contents/Resources/app.asar",
+      }
+  
+  2. 빌드 수행
+  `npm run build`
+  `npm run package`
+  
+  voipapp-win32-ia32/voipapp.app/Contents/Resources 경로에 app.asar 파일이 생성된 것을 볼 수 있다. app.asar파일이 존재하므로 app폴더를 삭제해도 voipapp.app은 정상 작동하게 되며 사용자는 앱의 소스코드에 접근하지 못하게 된다.
+  
+  ##### 2-4 앱 배포
+  최종 사용자에겐 voipapp 폴더를 배포하면 된다.
+  
+  ※ 더 자세한 내용은 Electron 홈페이지 참고 [Application Distribution \\| Electron](https://electronjs.org/docs/tutorial/application-distribution)
+  
+  ##### 2-5 window 인스톨러 만들기
+  1. electron-installer-windows 를 dev 버전으로 설치
+  `npm install electron-installer-windows --save-dev`
+  
+  2. package.json 파일에 build 명령어 추가
+  
+  
+      ...
+      "scripts": {
+        "build": "electron-packager ."
+      }
+  
+  
+  
+  ### 2. 일렉트론 빌드 도구 사용하기
+  
+  여러 가지 빌드 도구가 존재.
+  이번 장에서는 electron-builder 라는 도구를 사용.
+  이게 electron-packager 보다 사용성이 더 좋은듯..
+  
+  아래 명령어로 electron-builder와 electron 설치
+  `npm install electron-builder electron --save-dev`
+  
+  electron-builder는 package.json에서 다음 항목을 확인하고, 이를 기반으로 빌드
+  - name 속성
+  - description
+  - version
+  - author
+  - build 속성에서 지정한 객체
+  - scripts 속성에 지정한 객체의 pack 속성과 dist 속성
+  
+  이런 것들이 있어야 electron-builder 를 사용해 스탠드얼론 실행 파일을 만들 수 있다.
+  
+  > 코드4.1. electron-builder설정 예
+  
+      {
+        "name": "mcptt-process-app",
+        "version": "1.0.0",
+        "description": "mcptt background try app made by electron",
+        "main": "main.js",
+        "scripts": {
+          "test": "echo \\"Error: no test specified\\" && exit 1",
+          "start": "electron .",
+          "pack": "build",
+          "dist": "build"
+        },
+        "author": "",
+        "license": "ISC",
+        "dependencies": {
+          "express": "^4.16.4",
+          "ffi": "^2.3.0",
+          "socket.io": "^2.2.0"
+        },
+        "devDependencies": {
+          "electron": "^4.0.0",
+          "electron-builder": "^20.38.3",
+          "electron-prebuilt": "^1.4.13",
+          "electron-rebuild": "^1.8.2"
+        },
+        "build": {}
+      }
+  
+  다음 명령어를 실행하여 스탠드얼론 실행 파일을 생성
+  `npm run pack`
+  
+  빌드가 완료되면 dist 폴더가 생성되며, 내부에 win 폴더가 있다.
+  그 폴더 내부에 애플리케이션 zip파일과 DMG파일이 있다.
+  zip 파일은 자동 업데이트 전용 파일, DMG파일은 설치 파일. 관련 내용은 추후에 설명.
+  
+  * electron-builder 의 설정 옵션
+  다양한 옵션을 사용할 수 있다.
+  [GitHub - electron-userland/electron-builder](https://github.com/electron-userland/electron-builder)
+  
+  
+'''
+isStarred: false
+isTrashed: false

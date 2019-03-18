@@ -1,5 +1,5 @@
 createdAt: "2018-11-28T05:30:22.629Z"
-updatedAt: "2018-11-28T06:38:37.753Z"
+updatedAt: "2018-12-19T07:20:18.563Z"
 type: "MARKDOWN_NOTE"
 folder: "6c4c627ad430495f5a91"
 title: "Nodejs 에서 C 라이브러리 호출하기 :christmas_tree:"
@@ -63,7 +63,8 @@ content: '''
   
       $ node hello.js
       hello everybody :)
-      0
+      0 
+  
 '''
 tags: []
 isStarred: false

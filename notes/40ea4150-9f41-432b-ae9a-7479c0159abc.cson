@@ -1,0 +1,30 @@
+createdAt: "2019-03-10T02:06:35.487Z"
+updatedAt: "2019-03-11T04:07:16.749Z"
+type: "MARKDOWN_NOTE"
+folder: "c4debb4c6289b9260e1d"
+title: "IMS 솔루션"
+tags: []
+content: '''
+  ## IMS 솔루션
+  
+  ### IMS (IP Multimedia Subsystem)
+  : 인터넷 프로토콜(IP)을 기반으로 음성, 오디오, 비디오 및 데이터 등의 멀리미디어 서비스를 제공하는 규격. 
+  IP망을 기반으로 하는 각종 유무선 통합망을 지원하는 기술
+  
+  ### VoIP (Voice over Internet Protocol)
+  : 인터넷 전화 또는 음성패킷망
+  초고속인터넷과 같이 IP망을 기반으로 패킷 데이터를 통해 음성통화를 구현하는 통신기술
+  
+  ### SIP (Session Initiation Protocol)
+  : 인터넷 기반 멀티미디어 서비스 세션을 생성하고 수정하고 종료하기 위한 시그널링 프로토콜
+  역할은 메시지 교환을 원하는 주체들 간에 메시지 세션을 제어하기 위한 정보를 교환하는 것.
+  
+  ### T-API (Terminal API)
+  : RCS와 IMS 서비스를 기반으로한 RCS App을 개발하기 위한 API를 정의
+  T-API는 App과 joyn service간 Interface를 정의
+  (joyn service: Capability, Chat, File Transfer, Video Share, Image Share, etc)
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

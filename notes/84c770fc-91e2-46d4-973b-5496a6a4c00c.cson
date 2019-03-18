@@ -1,5 +1,5 @@
 createdAt: "2018-09-06T07:25:04.590Z"
-updatedAt: "2018-09-06T07:34:37.177Z"
+updatedAt: "2019-01-21T11:42:38.239Z"
 type: "MARKDOWN_NOTE"
 folder: "dcb9e4ff3b96fbadcec9"
 title: "Tip :santa:"
@@ -15,6 +15,143 @@ content: '''
   : web page 에 출력된다.
   
   document.write('Hello World :D');
+  
+  - 확인창
+  : 확인 클릭 시 true 반환, 취소 클릭 시 false 반환
+  
+  var result = window.confirm('게임 시작! 준비됐나요?');
+  
+  - 배열
+  |메서드명|의미|
+  |--|--|
+  |pop|배열의 마지막 데이터를 삭제한다|
+  |push|배열의 마지막 부분에 데이터를 추가한다.|
+  |shift|배열의 첫 번째 데이터를 삭제한다|
+  |unshift(data1, data2)|배열의 앞 부분에 data1, data2를 추가한다.|
+  
+  - 객체
+  : 여러 프로퍼티를 가지고 있는 데이터의 집합
+  각 프로퍼티에는 데이터가 저장돼 있으므로 각종 데이터를 하나로 모아서 하나의 변수로 사용할 수 있는 데이터라고 할 수도 있다.
+  
+  var 변수명 = {프로퍼티명1:데이터, 프로퍼티명2:데이터, ..., 프로퍼티명n:데이터}
+  프로퍼티 데이터 읽어 오기
+  // 1번째 방법
+  객체명.프로퍼티명
+  // 2번째 방법
+  객체명['프로퍼티명']
+  
+  프로퍼티의 데이터로 함수를 저장할 수도 있다.
+  ex)
+  var obj = {
+    addTax: function(num) {
+      return num * 1.08;
+    }
+  }
+  
+  for (var p in jsbook) {
+      console.log(p + ':' +jsbook[p]);
+  }
+  
+  - Math
+  |메서드명|의미|
+  |--|--|
+  |abs(x)|x의 절대 값|
+  |atan2(y,x)|좌표(x,y)의 x축을 기준으로 한 각도(radian)|
+  |ceil(x)|x의 소수점 이하를 버린다.|
+  |cos(x)|x의 코사인|
+  |floor(x)|소수점 이하를 버린다.|
+  |max(a,b,...)|괄호 안의 매개변수 중 최대 값을 반환한다.|
+  |min(a,b,...)|괄호 안의 매개변수 중 최소 값을 반환한다.|
+  |pow(x, y)|x를 y제곱한다.|
+  |random()|0이상 1미만의 난수(임의의 수)|
+  |round(x)|x의 소수점 이하를 반올림한다|
+  |sin(x)|x의 사인(sin)|
+  |sqrt(x)|x의 제곱근|
+  |tan(x)|x의 탄젠트(tan)|
+  
+  - Timer
+  : 대기 시간 후 함수를 호출한다.
+  setTimeout(함수, 대기시간)
+  
+  - form:select
+  드롭다운 박스
+  // html
+  
+      `<form id="form">`
+          `<select name="select">`
+              `<option value="index.html">한국어</option>`
+              `<option value="index-en.html">English</option>`
+              `<option value="index-jp.html">日本語</option>`
+          `</select>`
+      `</form>`
+  `<script src="script.js"></script>`
+   
+  // script.js
+  
+      var lang = document.querySelector('html').lang;
+      var opt;
+      console.log('lang: ' + lang);
+      if (lang === 'ko') {
+          opt = document.querySelector('option[value="index.html"]');
+      } else if (lang === 'en') {
+          opt = document.querySelector('option[value="index-en.html"]');
+      } else if (lang === 'jp') {
+          opt = document.querySelector('option[value="index-jp.html"]');
+      }
+      opt.selected = true;
+  
+      document.getElementById('form').select.onchange = function () {
+          location.href = document.getElementById('form').select.value;
+          // console.log(document.getElementById('form').select.value)
+      }
+  
+  - 쿠키
+  라이브러리: github.com/js-cookie/js-cookie
+  
+  - ajax
+  페이지 전체를 변경하지 않고 웹 서버와 데이터를 교환하는 자바스크립트 기능
+  Ajax를 사용하면 최신 데이터를 가져와서 화면의 일부만 변경할 수 있다.
+  $.ajax({url: 'data.json', dataType: 'json', 기타 설정: '설정 값'});
+  url: 다운로드 하고 싶은 데이터의 url을 설정
+  dataType: 다운로드 할 데이터의 형식을 설정
+  
+  - 자주 사용하는 제이쿼리 메서드 목록
+  |메서드|개요|
+  |--|--|
+  |핵심기능||
+  |$('선택자')|선택자와 일치하는 요소를 모두 가져온다|
+  |$(배열 또는 객체)|배열 데이터나 객체 프로퍼티를 모두 가져온다|
+  |$.ajax()|비동기 통신을 한다|
+  |트래버설||
+  |.next()|바로 다음 형제 요소를 가져온다|
+  |.find('선택자')|자식 및 손자 요소 중 선택자가 일치하는 요소를 모두 가져온다.|
+  |.children('선택자')|자식 요소를 모두 가져온다. 매개변수로 선택자를 지정한 경우 자식 요소 중 선택자가 일치하는 요소만 가져온다|
+  |.parent('선택자')|부모 요소를 가져온다. 매개변수로 선택자를 지정한 경우 부모 요소 중 선택자가 일치하는 요소만 가져온다|
+  |.each(function(){...})|가져온 모든 요소 또는 배열 데이터에 대해 {...} 안의 처리를 실행한다|
+  |.sblings()|형제 요소를 가져온다|
+  |.prev()|바로 앞의 형제 요소를 가져온다|
+  |조작(HTML이나 CSS를 조작하는 기능)||
+  |.addClass('클래스')|클래스를 추가한다|
+  |.removeClass('클래스')|클래스를 삭제한다|
+  |.toggleClass('클래스')|가져온 요소에 클래스가 있으면 삭제하고, 없으면 추가한다|
+  |.text('텍스트')|텍스트 콘텐츠를 설정한다(변경한다)|
+  |.text()|텍스트 콘텐츠를 읽는다|
+  |.hasClass('클래스')|가져온 요소에 클래스가 있는지 조사한다|
+  |.prepend('요소')|가져온 요소에 자식 요소를 삽입한다. 이미 자식 요소가 있으면 그 앞에 삽입한다|
+  |.append('요소')|가져온 요소에 자식 요소를 삽입한다. 이미 자식 요소가 있으면 그 뒤에 삽입한다|
+  |.attr('속성명'.'값')|요소의 속성에 값을 설정한다|
+  |.attr('속성명')|요소의 속성에 값을 읽는다|
+  |.removed()|요소를 삭제한다|
+  |애니메이션||
+  |.slideDown(속도)|가져온 요소를 표시한다|
+  |.slideUp(속도)|가져온 요소를 감춘다|
+  |.slideToggle(속도)|가져온 요소가 표시돼 있으면 감추고, 감춰져 있으면 표시한다.|
+  |이벤트||
+  |.on('이벤트', function(){...})|이벤트를 설정한다|
+  |event.preventDefault()|이벤트의 기본 동작을 취소한다|
+  
+  
+  
   
 '''
 tags: []
